@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -21,6 +22,21 @@ namespace Weather_Data
 
             SetVariables setVariables = new SetVariables(this, api);
             setVariables.SetData();
+
+            /*new Thread(() => 
+            {
+                while(true)
+                {
+                    //Thread.Sleep(1000);
+                    api.Refresh();
+                    Console.WriteLine("Odświerzono");
+                }
+            }).Start();*/
+        }
+
+        private void refreshData_Click(object sender, EventArgs e)
+        {
+            api.Refresh();
         }
 
         /*

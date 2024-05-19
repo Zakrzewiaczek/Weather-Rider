@@ -2,6 +2,8 @@
 using System.Net.Http;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
+using System.Windows.Forms;
+using Newtonsoft.Json;
 
 namespace Weather_Data
 {
@@ -14,9 +16,9 @@ namespace Weather_Data
 
         public APIData(string token, string weatherStationName, string countryCode = "pl")
         {
-            AccessToken = token;
-            StationName = weatherStationName;
-            Country = countryCode;
+            AccessToken = token.ToLower();
+            StationName = weatherStationName.ToUpper();
+            Country = countryCode.ToLower();
 
             data = DownloadData();
         }
@@ -37,9 +39,20 @@ namespace Weather_Data
             {
                 HttpResponseMessage response = client.GetAsync(url).Result;
                 response.EnsureSuccessStatusCode();
-                string responseBody = response.Content.ReadAsStringAsync().Result;
 
+                string responseBody = response.Content.ReadAsStringAsync().Result;
                 JObject json = JObject.Parse(responseBody);
+
+                #region Checking response code
+
+                string responseMessage = (string)json["SUMMARY"]["RESPONSE_MESSAGE"];
+                if (responseMessage != "OK")
+                {
+                    throw new JsonSerializationException(responseMessage);
+                }
+
+                #endregion
+
                 JObject station = (JObject)json["STATION"][0];
                 JObject observations = (JObject)station["OBSERVATIONS"];
 
@@ -50,9 +63,16 @@ namespace Weather_Data
                     observationsDict.Add(observation.Key, value);
                 }
             }
-            catch (AggregateException e)
+            catch(JsonSerializationException eJson) 
             {
-                Console.WriteLine($"Wystąpił wyjątek: {e.InnerException.Message}");
+                MessageBox.Show($"An exception occurred:\nMake sure your API token, weather station name and country is correct\n\nError content: {eJson.Message}\n", "Data exception", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Environment.Exit(1);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"An exception occurred:\n{e.Message}", "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Environment.Exit(1);
             }
 
             return observationsDict;

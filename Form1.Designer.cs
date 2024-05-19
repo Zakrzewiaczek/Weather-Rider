@@ -39,10 +39,11 @@
             this.windDataLabel = new System.Windows.Forms.Label();
             this.windDataPictureBox = new System.Windows.Forms.PictureBox();
             this.cloudData = new System.Windows.Forms.Panel();
-            this.headerLabel = new System.Windows.Forms.Label();
             this.cloudData_data_out = new System.Windows.Forms.Label();
             this.cloudDataLabel = new System.Windows.Forms.Label();
+            this.headerLabel = new System.Windows.Forms.Label();
             this.airData = new System.Windows.Forms.Panel();
+            this.refreshData = new System.Windows.Forms.Button();
             this.generalData.SuspendLayout();
             this.windData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.windDataPictureBox)).BeginInit();
@@ -51,71 +52,68 @@
             // 
             // generalData
             // 
-            this.generalData.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.generalData.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.generalData.Controls.Add(this.generalData_data_out);
             this.generalData.Controls.Add(this.generalDataLabel);
             this.generalData.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.generalData.Location = new System.Drawing.Point(23, 82);
+            this.generalData.Location = new System.Drawing.Point(17, 90);
             this.generalData.Margin = new System.Windows.Forms.Padding(4);
             this.generalData.Name = "generalData";
-            this.generalData.Size = new System.Drawing.Size(394, 240);
+            this.generalData.Size = new System.Drawing.Size(394, 256);
             this.generalData.TabIndex = 0;
             // 
             // generalData_data_out
             // 
             this.generalData_data_out.AutoSize = true;
             this.generalData_data_out.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.generalData_data_out.Location = new System.Drawing.Point(257, 24);
+            this.generalData_data_out.Location = new System.Drawing.Point(257, 23);
             this.generalData_data_out.Name = "generalData_data_out";
-            this.generalData_data_out.Size = new System.Drawing.Size(57, 190);
+            this.generalData_data_out.Size = new System.Drawing.Size(57, 209);
             this.generalData_data_out.TabIndex = 7;
-            this.generalData_data_out.Text = "XXXXXX\r\nXXXXXX\r\nXXXXXX\r\n\r\nXXXXXX\r\n\r\nXXXXXX\r\nXXXXXX\r\n\r\nXXXXXX";
+            this.generalData_data_out.Text = "XXXXXX\r\nXXXXXX\r\nXXXXXX\r\n\r\nXXXXXX\r\n\r\nXXXXXX\r\nXXXXXX\r\nXXXXXX\r\n\r\nXXXXXX";
             this.generalData_data_out.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // generalDataLabel
             // 
             this.generalDataLabel.AutoSize = true;
             this.generalDataLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.generalDataLabel.Location = new System.Drawing.Point(28, 23);
+            this.generalDataLabel.Location = new System.Drawing.Point(28, 22);
             this.generalDataLabel.Name = "generalDataLabel";
-            this.generalDataLabel.Size = new System.Drawing.Size(169, 190);
+            this.generalDataLabel.Size = new System.Drawing.Size(169, 209);
             this.generalDataLabel.TabIndex = 0;
             this.generalDataLabel.Text = "Air temerature\r\nSoil temperature\r\nWater temperature\r\n\r\nRelative humidity\r\n\r\nPress" +
-    "ure\r\nPressure (sea level)\r\n\r\nPrecipitation accumulated";
+    "ure\r\nPressure (sea level)\r\nPressure tendency\r\n\r\nPrecipitation accumulated";
             this.generalDataLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // detailedData
             // 
-            this.detailedData.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.detailedData.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.detailedData.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.detailedData.Location = new System.Drawing.Point(430, 82);
+            this.detailedData.Location = new System.Drawing.Point(17, 354);
             this.detailedData.Margin = new System.Windows.Forms.Padding(4);
             this.detailedData.Name = "detailedData";
-            this.detailedData.Size = new System.Drawing.Size(433, 240);
+            this.detailedData.Size = new System.Drawing.Size(462, 287);
             this.detailedData.TabIndex = 1;
             // 
             // windData
             // 
-            this.windData.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.windData.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.windData.Controls.Add(this.windDataLabel2);
             this.windData.Controls.Add(this.windData_data_out);
             this.windData.Controls.Add(this.windDataLabel);
             this.windData.Controls.Add(this.windDataPictureBox);
             this.windData.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.windData.Location = new System.Drawing.Point(476, 336);
+            this.windData.Location = new System.Drawing.Point(487, 354);
             this.windData.Margin = new System.Windows.Forms.Padding(4);
             this.windData.Name = "windData";
-            this.windData.Size = new System.Drawing.Size(604, 287);
+            this.windData.Size = new System.Drawing.Size(587, 287);
             this.windData.TabIndex = 2;
             // 
             // windDataLabel2
             // 
             this.windDataLabel2.AutoSize = true;
             this.windDataLabel2.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.windDataLabel2.Location = new System.Drawing.Point(436, 46);
+            this.windDataLabel2.Location = new System.Drawing.Point(422, 46);
             this.windDataLabel2.Name = "windDataLabel2";
             this.windDataLabel2.Size = new System.Drawing.Size(103, 21);
             this.windDataLabel2.TabIndex = 10;
@@ -125,7 +123,7 @@
             // 
             this.windData_data_out.AutoSize = true;
             this.windData_data_out.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.windData_data_out.Location = new System.Drawing.Point(214, 31);
+            this.windData_data_out.Location = new System.Drawing.Point(206, 31);
             this.windData_data_out.Name = "windData_data_out";
             this.windData_data_out.Size = new System.Drawing.Size(57, 228);
             this.windData_data_out.TabIndex = 9;
@@ -136,7 +134,7 @@
             // 
             this.windDataLabel.AutoSize = true;
             this.windDataLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.windDataLabel.Location = new System.Drawing.Point(51, 30);
+            this.windDataLabel.Location = new System.Drawing.Point(43, 30);
             this.windDataLabel.Name = "windDataLabel";
             this.windDataLabel.Size = new System.Drawing.Size(123, 228);
             this.windDataLabel.TabIndex = 8;
@@ -148,7 +146,7 @@
             // 
             this.windDataPictureBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("windDataPictureBox.BackgroundImage")));
             this.windDataPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.windDataPictureBox.Location = new System.Drawing.Point(412, 77);
+            this.windDataPictureBox.Location = new System.Drawing.Point(395, 77);
             this.windDataPictureBox.Name = "windDataPictureBox";
             this.windDataPictureBox.Size = new System.Drawing.Size(150, 150);
             this.windDataPictureBox.TabIndex = 0;
@@ -156,23 +154,45 @@
             // 
             // cloudData
             // 
-            this.cloudData.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.cloudData.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cloudData.Controls.Add(this.cloudData_data_out);
             this.cloudData.Controls.Add(this.cloudDataLabel);
             this.cloudData.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.cloudData.Location = new System.Drawing.Point(23, 336);
+            this.cloudData.Location = new System.Drawing.Point(419, 90);
             this.cloudData.Margin = new System.Windows.Forms.Padding(4);
             this.cloudData.Name = "cloudData";
-            this.cloudData.Size = new System.Drawing.Size(445, 287);
+            this.cloudData.Size = new System.Drawing.Size(387, 256);
             this.cloudData.TabIndex = 3;
+            // 
+            // cloudData_data_out
+            // 
+            this.cloudData_data_out.AutoSize = true;
+            this.cloudData_data_out.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.cloudData_data_out.Location = new System.Drawing.Point(185, 31);
+            this.cloudData_data_out.Name = "cloudData_data_out";
+            this.cloudData_data_out.Size = new System.Drawing.Size(57, 190);
+            this.cloudData_data_out.TabIndex = 12;
+            this.cloudData_data_out.Text = "XXXXXX\r\nXXXXXX\r\nXXXXXX\r\n\r\nXXXXXX\r\n\r\nXXXXXX\r\n\r\nXXXXXX\r\nXXXXXX";
+            this.cloudData_data_out.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // cloudDataLabel
+            // 
+            this.cloudDataLabel.AutoSize = true;
+            this.cloudDataLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.cloudDataLabel.Location = new System.Drawing.Point(26, 32);
+            this.cloudDataLabel.Name = "cloudDataLabel";
+            this.cloudDataLabel.Size = new System.Drawing.Size(123, 190);
+            this.cloudDataLabel.TabIndex = 11;
+            this.cloudDataLabel.Text = "Cloud layer 1\r\nCloud layer 2\r\nCloud layer 3\r\n\r\nCeiling\r\n\r\nVisiblity\r\n\r\nWeather co" +
+    "ndition\r\nWeather summary";
+            this.cloudDataLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // headerLabel
             // 
             this.headerLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.headerLabel.AutoSize = true;
             this.headerLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.headerLabel.Location = new System.Drawing.Point(326, 19);
+            this.headerLabel.Location = new System.Drawing.Point(325, 19);
             this.headerLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.headerLabel.Name = "headerLabel";
             this.headerLabel.Size = new System.Drawing.Size(459, 38);
@@ -180,46 +200,35 @@
             this.headerLabel.Text = "WEATHER STATION: XXXXX, XX";
             this.headerLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // cloudData_data_out
-            // 
-            this.cloudData_data_out.AutoSize = true;
-            this.cloudData_data_out.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.cloudData_data_out.Location = new System.Drawing.Point(272, 29);
-            this.cloudData_data_out.Name = "cloudData_data_out";
-            this.cloudData_data_out.Size = new System.Drawing.Size(57, 152);
-            this.cloudData_data_out.TabIndex = 12;
-            this.cloudData_data_out.Text = "XXXXXX\r\nXXXXXX\r\nXXXXXX\r\n\r\nXXXXXX\r\n\r\nXXXXXX\r\nXXXXXX";
-            this.cloudData_data_out.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // cloudDataLabel
-            // 
-            this.cloudDataLabel.AutoSize = true;
-            this.cloudDataLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.cloudDataLabel.Location = new System.Drawing.Point(47, 29);
-            this.cloudDataLabel.Name = "cloudDataLabel";
-            this.cloudDataLabel.Size = new System.Drawing.Size(123, 152);
-            this.cloudDataLabel.TabIndex = 11;
-            this.cloudDataLabel.Text = "Cloud layer 1\r\nCloud layer 2\r\nCloud layer 3\r\n\r\nCeiling\r\n\r\nWeather condition\r\nWeat" +
-    "her summary";
-            this.cloudDataLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // airData
             // 
-            this.airData.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.airData.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.airData.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.airData.Location = new System.Drawing.Point(874, 82);
+            this.airData.Location = new System.Drawing.Point(814, 90);
             this.airData.Margin = new System.Windows.Forms.Padding(4);
             this.airData.Name = "airData";
-            this.airData.Size = new System.Drawing.Size(206, 240);
+            this.airData.Size = new System.Drawing.Size(260, 256);
             this.airData.TabIndex = 2;
+            // 
+            // refreshData
+            // 
+            this.refreshData.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.refreshData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.refreshData.Location = new System.Drawing.Point(17, 12);
+            this.refreshData.Name = "refreshData";
+            this.refreshData.Size = new System.Drawing.Size(79, 26);
+            this.refreshData.TabIndex = 5;
+            this.refreshData.Text = "Refresh";
+            this.refreshData.UseVisualStyleBackColor = true;
+            this.refreshData.Click += new System.EventHandler(this.refreshData_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1093, 636);
+            this.ClientSize = new System.Drawing.Size(1090, 659);
+            this.Controls.Add(this.refreshData);
             this.Controls.Add(this.airData);
             this.Controls.Add(this.headerLabel);
             this.Controls.Add(this.cloudData);
@@ -260,6 +269,7 @@
         public System.Windows.Forms.Label cloudData_data_out;
         public System.Windows.Forms.Label cloudDataLabel;
         private System.Windows.Forms.Panel airData;
+        private System.Windows.Forms.Button refreshData;
     }
 }
 

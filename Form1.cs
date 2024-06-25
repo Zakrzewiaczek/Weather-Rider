@@ -13,7 +13,7 @@ namespace Weather_Data
 {
     public partial class Form1 : Form
     {
-        public APIData api = new APIData("7daf5528a4db41b5ae686e8f567f264e", "EPWA");
+        public APIData api = new APIData("YOUR_API_KEY", "EPWA");
 
         public Form1()
         {
@@ -38,6 +38,7 @@ namespace Weather_Data
         {
             api.Refresh();
         }
+
 
         /*
         foreach (KeyValuePair<string, string> entry in api.GetData())

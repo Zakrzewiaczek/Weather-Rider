@@ -4,6 +4,8 @@ using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using System.Text.RegularExpressions;
+
 
 namespace Weather_Data
 {
@@ -19,6 +21,24 @@ namespace Weather_Data
             AccessToken = token.ToLower();
             StationName = weatherStationName.ToUpper();
             Country = countryCode.ToLower();
+
+
+            Console.WriteLine("Data downloaded");
+
+            if (!new Regex("^[0-9a-f]+$").IsMatch(AccessToken))
+            {
+                DialogResult result = MessageBox.Show("API token is not valid. Your token is invalid. Do you want to enter it?", "API token error", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+
+                if (result == DialogResult.Yes)
+                {
+                    AccessToken = Microsoft.VisualBasic.Interaction.InputBox("Enter your API token", "API token", "");
+                    _ = new APIData(AccessToken, StationName, Country);
+                }
+                else
+                {
+                    Environment.Exit(1);
+                }
+            }
 
             data = DownloadData();
         }

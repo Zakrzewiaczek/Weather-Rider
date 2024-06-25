@@ -35,9 +35,7 @@ namespace Weather_Data
                     _ = new APIData(AccessToken, StationName, Country);
                 }
                 else
-                {
                     Environment.Exit(1);
-                }
             }
 
             data = DownloadData();

@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Weather_Rider" GeneratedClassName="GlobalSettings">
+  <Profiles />
+  <Settings>
+    <Setting Name="TimeZone" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Europe/Berlin</Value>
+    </Setting>
+    <Setting Name="TemperatureUnit" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C</Value>
+    </Setting>
+    <Setting Name="WindSpeedUnit" Type="System.String" Scope="User">
+      <Value Profile="(Default)">km/h</Value>
+    </Setting>
+    <Setting Name="PrecipationUnit" Type="System.String" Scope="User">
+      <Value Profile="(Default)">mm</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

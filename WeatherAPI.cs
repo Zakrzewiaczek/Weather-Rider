@@ -1,7 +1,9 @@
 ﻿using System.Diagnostics;
 using System.Globalization;
+using System.Xml.Linq;
 
-using OpenMeteo;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Weather_Rider
 {
@@ -11,6 +13,7 @@ namespace Weather_Rider
         public double Lon => lon;
     }
 
+
     /*
      * 
      * https://open-meteo.com/en/docs#current=&hourly=&daily=&forecast_days=1
@@ -18,13 +21,85 @@ namespace Weather_Rider
      * 
      */
 
-    public class WeatherAPI()
+    public class WeatherAPI(Place place)
     {
-        private Place place;
         public Place Place { get => place; set => place = value; }
 
 
-        public string HttpRequest()
+        private readonly Dictionary<string, string> units = [];
+
+        public Dictionary<string, (object data, string unit)> AllData => allData;
+        private readonly Dictionary<string, (object data, string unit)> allData = [];
+
+
+        public void Update()
+        {
+            (string weatherData, string aqiData) = HttpRequest();
+
+            JObject weatherJson = JObject.Parse(weatherData);
+            JObject aqiJson = JObject.Parse(aqiData);
+
+            DateTime nearestDate = DateTime.Now;
+            #region [...]
+
+            int minutes = nearestDate.Minute;
+            int previousQuarterMinute = (minutes / 15) * 15;
+            if (previousQuarterMinute == minutes) previousQuarterMinute -= 15;
+            if (previousQuarterMinute < 0) { nearestDate = nearestDate.AddHours(-1); previousQuarterMinute = 45; }
+            nearestDate = new(nearestDate.Year, nearestDate.Month, nearestDate.Day, nearestDate.Hour, previousQuarterMinute, 0);
+
+            #endregion
+
+
+            string[] listNames = ["hourly", "minutely_15", "daily"];
+            allData.Clear();
+
+            for(int index = 0; index < listNames.Length; index++)
+            {
+                AddUnits(weatherJson, listNames[index]);
+                AddData(weatherJson, listNames[index], allData, nearestDate);
+            }
+            AddUnits(aqiJson, listNames[0]);
+            AddData(aqiJson, listNames[0], allData, nearestDate);
+        }
+
+
+        private void AddUnits(JObject json, string unitKey)
+        {
+            var currentUnits = json[$"{unitKey}_units"]?.ToObject<Dictionary<string, string>>() ?? [];
+            foreach (var unit in currentUnits)
+                units.TryAdd(unit.Key, unit.Value);
+        }
+        private void AddData(JObject json, string dataKey, Dictionary<string, (object data, string unit)> dataDict, DateTime nearestTime)
+        {
+            json = json[dataKey]?.ToObject<JObject>() ?? [];
+            var times = json["time"]?.ToObject<List<DateTime>>() ?? [];
+
+            int timeIndex;
+            #region [...]
+
+            if (times.Count == 0)
+                throw new Exception("No data found");
+            else if (times.Count == 1)
+                timeIndex = 0;
+            else if (times.Count <= 24)
+                timeIndex = times.IndexOf(new DateTime(nearestTime.Year, nearestTime.Month, nearestTime.Day, nearestTime.Hour, 0, 0));
+            else
+                timeIndex = times.IndexOf(new DateTime(nearestTime.Year, nearestTime.Month, nearestTime.Day, 0, 0, 0));
+
+            #endregion
+
+            foreach (var data in json)
+            {
+                if (data.Key == "time") continue;
+
+                if (data.Value is JArray array && timeIndex < array.Count)
+                    dataDict.TryAdd(data.Key, (array[timeIndex] ?? new object(), units[data.Key]));
+                else
+                    dataDict.TryAdd(data.Key, (new object(), units[data.Key]));
+            }
+        }
+        private (string, string) HttpRequest()
         {
             Debug.WriteLine("HttpRequest variables initializing...");
             #region All uri data
@@ -38,7 +113,10 @@ namespace Weather_Rider
                 $"wind_speed_unit={GlobalSettings.Default.WindSpeedUnit.Replace("/", "")}",
                 $"precipitation_unit={GlobalSettings.Default.PrecipationUnit}",
                 $"forecast_days=1",
-                $"",
+
+                $"minutely_15=temperature_2m,relative_humidity_2m,dew_point_2m,apparent_temperature,precipitation,rain,snowfall,snowfall_height,freezing_level_height,wind_speed_10m,wind_speed_80m,wind_direction_10m,wind_direction_80m,wind_gusts_10m,visibility,lightning_potential,shortwave_radiation_instant,direct_radiation_instant,diffuse_radiation_instant,direct_normal_irradiance_instant,global_tilted_irradiance_instant,terrestrial_radiation_instant,cape",
+                $"hourly=precipitation_probability,snow_depth,pressure_msl,surface_pressure,cloud_cover,cloud_cover_low,cloud_cover_mid,cloud_cover_high,evapotranspiration,et0_fao_evapotranspiration,vapour_pressure_deficit,soil_temperature_0cm,soil_temperature_6cm,soil_temperature_18cm,soil_temperature_54cm,soil_moisture_0_to_1cm,soil_moisture_1_to_3cm,soil_moisture_3_to_9cm,soil_moisture_9_to_27cm,soil_moisture_27_to_81cm,temperature_1000hPa,temperature_975hPa,temperature_950hPa,temperature_925hPa,temperature_900hPa,temperature_850hPa,temperature_800hPa,temperature_700hPa,temperature_600hPa,temperature_500hPa,temperature_400hPa,temperature_300hPa,temperature_250hPa,temperature_200hPa,temperature_150hPa,temperature_100hPa,temperature_70hPa,temperature_50hPa,temperature_30hPa,relative_humidity_1000hPa,relative_humidity_975hPa,relative_humidity_950hPa,relative_humidity_925hPa,relative_humidity_900hPa,relative_humidity_850hPa,relative_humidity_800hPa,relative_humidity_700hPa,relative_humidity_600hPa,relative_humidity_500hPa,relative_humidity_400hPa,relative_humidity_300hPa,relative_humidity_250hPa,relative_humidity_200hPa,relative_humidity_150hPa,relative_humidity_100hPa,relative_humidity_70hPa,relative_humidity_50hPa,relative_humidity_30hPa,cloud_cover_1000hPa,cloud_cover_975hPa,cloud_cover_950hPa,cloud_cover_925hPa,cloud_cover_900hPa,cloud_cover_850hPa,cloud_cover_800hPa,cloud_cover_700hPa,cloud_cover_600hPa,cloud_cover_500hPa,cloud_cover_400hPa,cloud_cover_300hPa,cloud_cover_250hPa,cloud_cover_200hPa,cloud_cover_150hPa,cloud_cover_100hPa,cloud_cover_70hPa,cloud_cover_50hPa,cloud_cover_30hPa,wind_speed_1000hPa,wind_speed_975hPa,wind_speed_950hPa,wind_speed_925hPa,wind_speed_900hPa,wind_speed_850hPa,wind_speed_800hPa,wind_speed_700hPa,wind_speed_600hPa,wind_speed_500hPa,wind_speed_400hPa,wind_speed_300hPa,wind_speed_250hPa,wind_speed_200hPa,wind_speed_150hPa,wind_speed_100hPa,wind_speed_70hPa,wind_speed_50hPa,wind_speed_30hPa,wind_direction_1000hPa,wind_direction_975hPa,wind_direction_950hPa,wind_direction_925hPa,wind_direction_900hPa,wind_direction_850hPa,wind_direction_800hPa,wind_direction_700hPa,wind_direction_600hPa,wind_direction_500hPa,wind_direction_400hPa,wind_direction_300hPa,wind_direction_250hPa,wind_direction_200hPa,wind_direction_150hPa,wind_direction_100hPa,wind_direction_70hPa,wind_direction_50hPa,wind_direction_30hPa,uv_index,uv_index_clear_sky,wet_bulb_temperature_2m,total_column_integrated_water_vapour,convective_inhibition,boundary_layer_height",
+                $"daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,daylight_duration,rain_sum,showers_sum,snowfall_sum,wind_speed_10m_max,wind_gusts_10m_max,wind_direction_10m_dominant,shortwave_radiation_sum,sunshine_duration",
             ];
             List<string> aqiDataParams = 
             [
@@ -47,7 +125,7 @@ namespace Weather_Rider
                 $"timezone={GlobalSettings.Default.TimeZone.Replace("/", "%2F")}",
                 $"forecast_days=1",
                 $"domains=cams_europe",
-                $"current=pm10,pm2_5,carbon_monoxide,nitrogen_dioxide,sulphur_dioxide,ozone,aerosol_optical_depth,dust,ammonia,alder_pollen,birch_pollen,grass_pollen,mugwort_pollen,olive_pollen,ragweed_pollen"
+                $"hourly=pm10,pm2_5,carbon_monoxide,carbon_dioxide,nitrogen_dioxide,sulphur_dioxide,ozone,aerosol_optical_depth,dust,ammonia,methane,alder_pollen,birch_pollen,grass_pollen,mugwort_pollen,olive_pollen,ragweed_pollen"
             ];
             requestParams.RemoveAll(string.IsNullOrEmpty);
             aqiDataParams.RemoveAll(string.IsNullOrEmpty);
@@ -67,13 +145,13 @@ namespace Weather_Rider
             {
                 Task weatherDataDownloading = Task.Run(async () =>
                 {
-                    Debug.Write("weather data downloading");
+                    Debug.WriteLine("weather data downloading");
                     downloadedWeatherData = await client.GetStringAsync(new Uri(weatherDataURI));
                     Debug.WriteLine("weather data downloading OK");
                 });
                 Task aqiDataDownloading = Task.Run(async () =>
                 {
-                    Debug.Write("aqi data downloading");
+                    Debug.WriteLine("aqi data downloading");
                     downloadedAQIData = await client.GetStringAsync(new Uri(aqiDataURI));
                     Debug.WriteLine("aqi data downloading OK");
                 });
@@ -81,12 +159,8 @@ namespace Weather_Rider
                 Task.WaitAll(weatherDataDownloading, aqiDataDownloading);
             }
 
-            // Save to files in desktop
-            Debug.WriteLine("Saving data to files");
-            File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\weatherData.json", downloadedWeatherData);
-            File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\aqiData.json", downloadedAQIData);
-
-            return string.Empty;
+            Debug.WriteLine("All data downloaded");
+            return (downloadedWeatherData, downloadedAQIData);
         }
     }
 }

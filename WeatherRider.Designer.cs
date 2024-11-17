@@ -28,14 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
+            header = new Panel();
             SuspendLayout();
+            // 
+            // header
+            // 
+            header.Dock = DockStyle.Top;
+            header.Location = new Point(0, 0);
+            header.Name = "header";
+            header.Size = new Size(941, 59);
+            header.TabIndex = 0;
             // 
             // WeatherRider
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(941, 586);
+            Controls.Add(header);
             Name = "WeatherRider";
             Text = "Weather Rider";
             Load += LoadApp;
@@ -43,5 +53,7 @@
         }
 
         #endregion
+
+        private Panel header;
     }
 }

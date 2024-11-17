@@ -7,10 +7,32 @@ using Newtonsoft.Json.Linq;
 
 namespace Weather_Rider
 {
-    public readonly struct Place(double lat, double lon)
+    public struct Place(double lat, double lon)
     {
-        public double Lat => lat;
-        public double Lon => lon;
+        public readonly double Lat => lat;
+        public readonly double Lon => lon;
+
+        public string? Name { get; set; }
+        public string? ID { get; set; }
+        public string? CountryCode { get; set; }
+        public string? FeatureCode { get; set; }
+    }
+
+
+    /// <summary>
+    /// Exception thrown when the server returns an error request.
+    /// </summary>
+    public class HttpSenderErrorException : Exception
+    {
+        public HttpSenderErrorException() { }
+        public HttpSenderErrorException(string? message) : base(message) { }
+        public HttpSenderErrorException(string? message, Exception inner) : base(message, inner) { }
+    }
+    public class PlaceNotFound : Exception
+    {
+        public PlaceNotFound() { }
+        public PlaceNotFound(string? message) : base(message) { }
+        public PlaceNotFound(string? message, Exception inner) : base(message, inner) { }
     }
 
 
@@ -25,9 +47,7 @@ namespace Weather_Rider
     {
         public Place Place { get => place; set => place = value; }
 
-
         private readonly Dictionary<string, string> units = [];
-
         public Dictionary<string, (object data, string unit)> AllData => allData;
         private readonly Dictionary<string, (object data, string unit)> allData = [];
 
@@ -46,12 +66,14 @@ namespace Weather_Rider
             int previousQuarterMinute = (minutes / 15) * 15;
             if (previousQuarterMinute == minutes) previousQuarterMinute -= 15;
             if (previousQuarterMinute < 0) { nearestDate = nearestDate.AddHours(-1); previousQuarterMinute = 45; }
+            if (minutes % 15 > 7) previousQuarterMinute += 15;
             nearestDate = new(nearestDate.Year, nearestDate.Month, nearestDate.Day, nearestDate.Hour, previousQuarterMinute, 0);
 
             #endregion
 
 
             string[] listNames = ["hourly", "minutely_15", "daily"];
+            units.Clear();
             allData.Clear();
 
             for(int index = 0; index < listNames.Length; index++)
@@ -72,9 +94,13 @@ namespace Weather_Rider
         }
         private void AddData(JObject json, string dataKey, Dictionary<string, (object data, string unit)> dataDict, DateTime nearestTime)
         {
+            // Checking errors
+            if (json["error"]?.ToString() != null)
+                throw new HttpSenderErrorException(json["reason"]?.ToString());
+            
+
             json = json[dataKey]?.ToObject<JObject>() ?? [];
             var times = json["time"]?.ToObject<List<DateTime>>() ?? [];
-
             int timeIndex;
             #region [...]
 
@@ -92,11 +118,10 @@ namespace Weather_Rider
             foreach (var data in json)
             {
                 if (data.Key == "time") continue;
-
-                if (data.Value is JArray array && timeIndex < array.Count)
-                    dataDict.TryAdd(data.Key, (array[timeIndex] ?? new object(), units[data.Key]));
-                else
-                    dataDict.TryAdd(data.Key, (new object(), units[data.Key]));
+                
+                JArray? array = data.Value as JArray;
+                // Jeżeli System.ArgumentOutOfRangeException (timeIndex = -1) to może być w pliku zła data
+                dataDict.TryAdd(data.Key, (array?[timeIndex]?.ToString() ?? "null", units[data.Key] ?? "null"));
             }
         }
         private (string, string) HttpRequest()
@@ -141,7 +166,7 @@ namespace Weather_Rider
             Debug.WriteLine("weather: " + weatherDataURI);
             Debug.WriteLine("aqi: " + aqiDataURI);
             Debug.WriteLine("Downloading data from server: ");
-            using (HttpClient client = new())
+            /*using (HttpClient client = new())
             {
                 Task weatherDataDownloading = Task.Run(async () =>
                 {
@@ -157,10 +182,51 @@ namespace Weather_Rider
                 });
 
                 Task.WaitAll(weatherDataDownloading, aqiDataDownloading);
-            }
+            }*/
+
+            downloadedWeatherData = File.ReadAllText("weather.txt");
+            downloadedAQIData = File.ReadAllText("aqi.txt");
 
             Debug.WriteLine("All data downloaded");
             return (downloadedWeatherData, downloadedAQIData);
+        }
+
+        public static Place GetPlaceByName(string name)
+        {
+            string uri = $"https://geocoding-api.open-meteo.com/v1/search?count=1&language=en&format=json&name={name}";
+            string jsonData = string.Empty;
+
+            using (HttpClient client = new())
+            {
+                Task.Run(async () =>
+                {
+                    Debug.WriteLine("Place data downloading");
+                    jsonData = await client.GetStringAsync(new Uri(uri));
+                    Debug.WriteLine("Place data downloading OK");
+                }).Wait();
+            }
+
+            JObject json = JObject.Parse(jsonData);
+
+            // Checking if the server returned results
+            if (json["results"] == null)
+                throw new PlaceNotFound();
+
+
+            JToken results = json["results"]![0]!;
+
+            Place place = new(
+                double.Parse(results["latitude"]!.ToString()),
+                double.Parse(results["longitude"]!.ToString())
+            )
+            {
+                Name = results["name"]!.ToString(),
+                ID = results["id"]!.ToString(),
+                CountryCode = results["country_code"]!.ToString(),
+                FeatureCode = results["feature_code"]!.ToString()
+            };
+
+            return place;
         }
     }
 }

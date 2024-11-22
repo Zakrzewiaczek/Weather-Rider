@@ -117,4 +117,181 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="header.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="generalData.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="general_data.Text" xml:space="preserve">
+    <value>{temperature_2m.data} {temperature_2m.unit}
+{apparent_temperature.data} {apparent_temperature.unit}
+{relative_humidity_2m.data} {relative_humidity_2m.unit}
+{dew_point_2m.data} {dew_point_2m.unit}
+{wet_bulb_temperature_2m.data} {wet_bulb_temperature_2m.unit}
+{surface_pressure.data} {surface_pressure.unit}
+{pressure_msl.data} {pressure_msl.unit}
+{precipitation.data} {precipitation.unit}
+{precipitation_probability.data} {precipitation_probability.unit}
+{rain.data} {rain.unit}
+{snowfall.data} {snowfall.unit}
+{snowfall_height.data} {snowfall_height.unit}
+{freezing_level_height.data} {freezing_level_height.unit}
+{visibility.data} {visibility.unit}
+{lightning_potential.data} {lightning_potential.unit}</value>
+  </data>
+  <metadata name="general_description.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="general_description.Text" xml:space="preserve">
+    <value>Current temp.
+Current apparent temp.
+Relative humidity (2m)
+Dev point (2m)
+Wet bulb temp. (2m)
+Surface pressure
+Pressure (msl)
+Precipitation
+Precip. probability
+Rain
+Snowfall
+Snowfall height
+Freezing level height
+Visibility
+Lightning potential</value>
+  </data>
+  <metadata name="dailyData.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="daily_data.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="daily_data.Text" xml:space="preserve">
+    <value>{temperature_2m_min.data} {temperature_2m_min.unit}
+{temperature_2m_max.data} {temperature_2m_max.unit}
+{apparent_temperature_min.data} {apparent_temperature_min.unit}
+{apparent_temperature_max.data} {apparent_temperature_max.unit}
+{sunrise.data}
+{sunset.data}
+{daylight_duration.data}
+{sunshine_duration.data}
+{rain_sum.data} {rain_sum.unit}
+{showers_sum.data} {showers_sum.unit}
+{snowfall_sum.data} {snowfall_sum.unit}
+{wind_speed_10m_max.data} {wind_speed_10m_max.unit}
+{wind_gusts_10m_max.data} {wind_gusts_10m_max.unit}
+{wind_direction_10m_dominant.data} {wind_direction_10m_dominant.unit}
+{shortwave_radiation_sum.data} {shortwave_radiation_sum.unit}</value>
+  </data>
+  <metadata name="daily_description.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="daily_description.Text" xml:space="preserve">
+    <value>Min. temperature (2m)
+Max. temperature (2m)
+Min. apparent temperature (2m)
+Max. apparent temperature (2m)
+Sunrise
+Sunset
+Daylight duration
+Sunshine duration
+Rain sum
+Showers sum
+Showfall sum
+Max. wind speed (10m)
+Max. wind gusts (10m)
+Max. wind direction (10m)
+Shortwave radiation sum</value>
+  </data>
+  <metadata name="windData.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="radiationData.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="sun_data.Text" xml:space="preserve">
+    <value>{shortwave_radiation_instant.data} {shortwave_radiation_instant.unit}
+{direct_radiation_instant.data} {direct_radiation_instant.unit}
+{diffuse_radiation_instant.data} {diffuse_radiation_instant.unit}
+{direct_normal_irradiance_instant.data} {direct_normal_irradiance_instant.unit}
+{global_tilted_irradiance_instant.data} {global_tilted_irradiance_instant.unit}
+{terrestrial_radiation_instant.data} {terrestrial_radiation_instant.unit}
+
+
+
+
+
+
+
+{uv_index.data} {uv_index.unit}
+{uv_index_clear_sky.data} {uv_index_clear_sky.unit}</value>
+  </data>
+  <data name="sun_description.Text" xml:space="preserve">
+    <value>Shortwave radiation
+Direct sky radiation
+Diffuse sky radiation
+Direct Normal Irradiance (DNI)
+Global Tilted Irradiation/Irradiance (GTI)
+Terrestrial radiation
+
+
+
+
+
+
+
+UV index
+UV index (clear sky)</value>
+  </data>
+  <metadata name="airqualityData.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="cloudData.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="altitudesData.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="altitudesDataTable.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="atlitude_1000hPa.Text" xml:space="preserve">
+    <value>1000hPa (110 m)
+975hPa (320 m)
+950hPa (500 m)
+925hPa (800 m)
+900hPa (1000 m)
+850hPa (1500 m)
+800hPa (1900 m)
+700hPa (3 km)
+600hPa (4.2 km)
+500hPa (5.6 km)
+400hPa (7.2 km)
+300hPa (9.2 km)
+250hPa (10.4 km)
+200hPa (11.8 km)
+150hPa (13.5 km)
+100hPa (15.8 km)
+70hPa (17.7 km)
+50hPa (19.3 km)
+30hPa (22 km)</value>
+  </data>
+  <metadata name="advancedAtmosphericData.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="advancedData_data.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="advancedData_data.Text" xml:space="preserve">
+    <value>{cape.data} {cape.unit}
+{evapotranspiration.data} {evapotranspiration.unit}
+{et0_fao_evapotranspiration.data} {et0_fao_evapotranspiration.unit}
+{vapour_pressure_deficit.data} {vapour_pressure_deficit.unit}
+{total_column_integrated_water_vapour.data} {total_column_integrated_water_vapour.unit}
+{boundary_layer_height.data} {boundary_layer_height.unit}
+{convective_inhibition.data} {convective_inhibition.unit}</value>
+  </data>
+  <metadata name="advancedData_description.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

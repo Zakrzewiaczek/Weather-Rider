@@ -62,12 +62,15 @@ namespace Weather_Rider
             DateTime nearestDate = DateTime.Now;
             #region [...]
 
-            int minutes = nearestDate.Minute;
-            int previousQuarterMinute = (minutes / 15) * 15;
-            if (previousQuarterMinute == minutes) previousQuarterMinute -= 15;
-            if (previousQuarterMinute < 0) { nearestDate = nearestDate.AddHours(-1); previousQuarterMinute = 45; }
-            if (minutes % 15 > 7) previousQuarterMinute += 15;
-            nearestDate = new(nearestDate.Year, nearestDate.Month, nearestDate.Day, nearestDate.Hour, previousQuarterMinute, 0);
+            int najblizszeMinuty = ((nearestDate.Minute + 7) / 15) * 15;
+            if (najblizszeMinuty >= 60)
+            {
+                nearestDate = nearestDate.AddHours(1);
+                najblizszeMinuty = 0;
+            }
+
+            nearestDate = new DateTime(nearestDate.Year, nearestDate.Month, nearestDate.Day, nearestDate.Hour, najblizszeMinuty, 0);
+
 
             #endregion
 

@@ -426,7 +426,7 @@
             MaximizeBox = false;
             Name = "WeatherRider";
             Text = "Weather Rider";
-            Load += LoadApp;
+            WindowState = FormWindowState.Minimized;
             generalData.ResumeLayout(false);
             generalData.PerformLayout();
             dailyData.ResumeLayout(false);

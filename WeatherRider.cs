@@ -15,58 +15,89 @@ namespace Weather_Rider
 {
     public partial class WeatherRider : Form
     {
-        private Loading loadingForm = new();
+        private readonly Loading loadingForm = new();
 
 
         public WeatherRider()
         {
+            
             Debug.WriteLine("WeatherRider constructor called");
             InitializeComponent();
             Debug.WriteLine("Components initialized");
 
-            Application.Run(loadingForm);
+            Shown += (s, e) => Hide(); // Hide the form until the data is loaded
+            LoadApp(); // Load the app (in background)
         }
 
-        private void LoadApp(object sender, EventArgs e)
+        private async void LoadApp()
         {
             Debug.WriteLine("Loading app");
-            //Debug.WriteLine(WeatherAPI.GetPlaceByName("EPWA").Lat);
-            WeatherAPI weatherAPI = new(new(52.5889, 20.8055));
+            loadingForm.Show();
 
-            bool isException = false;
+            await Task.Delay(820);
 
-            try
+            await Task.Run(async () =>
             {
-                weatherAPI.Update();
-                throw new HttpSenderErrorException("Test error");
-            }
-            catch (HttpSenderErrorException ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                isException = true;
-            }
-            catch (ArgumentOutOfRangeException ex)
-            {
-                MessageBox.Show($"There is most likely a time mismatch issue.\n{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                isException = true;
-            }
+                loadingForm.Progress = 5;
+                //Debug.WriteLine(WeatherAPI.GetPlaceByName("EPWA").Lat);
+                Thread.Sleep(300);
 
-            if(isException)
-            {
-                Application.Exit();
-                Environment.Exit(1);
-                return;
-            }
+                WeatherAPI weatherAPI = new(new(52.5889, 20.8055));
+                loadingForm.Progress = 8;
 
-            // Displaying all data
-            Debug.WriteLine("Displaying all data");
-            foreach (var (key, value) in weatherAPI.AllData)
-            {
-                Debug.WriteLine($"{key}: {value}");
-            }
+                Thread.Sleep(800);
 
-            SettingUpLabels(weatherAPI);
+                bool isException = false;
+                try
+                {
+                    weatherAPI.Update();
+                    loadingForm.Progress = 30;
+                }
+                catch (HttpSenderErrorException ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    isException = true;
+                }
+                catch (ArgumentOutOfRangeException ex)
+                {
+                    MessageBox.Show($"There is most likely a time mismatch issue.\n{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    isException = true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Application error, try again later\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    isException = true;
+                }
+
+                if (isException)
+                {
+                    loadingForm.Exit();
+                    return;
+                }
+
+                // Displaying all data
+                Debug.WriteLine("Displaying all data");
+                foreach (var (key, value) in weatherAPI.AllData)
+                {
+                    Debug.WriteLine($"{key}: {value}");
+                }
+
+                loadingForm.Progress = 60;
+                SettingUpLabels(weatherAPI);
+
+                // Wait for the progress bar to finish
+                await Task.Delay(200);
+                loadingForm.Progress = 100;
+                await Task.Delay(100);
+
+                // Show the WeatherRider form
+                Invoke(Show);
+                await Task.Delay(300);
+                Invoke(() => WindowState = FormWindowState.Normal);
+                loadingForm.Exit();
+            });
         }
+
 
         private static List<Label> GetAllLabels(Control control)
         {
@@ -121,9 +152,14 @@ namespace Weather_Rider
                             toReplace = string.Empty;
 
                         Debug.WriteLine($"Replacing {match} with {toReplace}");
-                        label.Text = label.Text.Replace(match.ToString(), toReplace);
+                        label.Invoke(() => label.Text = label.Text.Replace(match.ToString(), toReplace));
                     }
                 }
+                new Task(async () => 
+                {
+                    await Task.Delay(10);
+                    loadingForm.Progress += 2;
+                }).Start();
             }
         }
 

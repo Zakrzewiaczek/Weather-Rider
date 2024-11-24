@@ -39,38 +39,48 @@ namespace Weather_Rider
 
         private void Loading_Load(object sender, EventArgs e)
         {
-            IEnumerable<ISeries> series = new List<ISeries>
-            {
+            IEnumerable<ISeries> series =
+            [
                 new PieSeries<int>
                 {
-                    Values = new List<int> { 1 },
+                    Values = [1],
                     InnerRadius = 60, // Wcięcie od środka
-                    Fill = new SolidColorPaint(SKColors.DeepSkyBlue), // Kolor wykresu na niebieski
+                    Fill = new SolidColorPaint(SKColors.DeepSkyBlue) // Kolor wykresu na niebieski
                 }
-            };
+            ];
+
+            // Zrobić ładowanie się aplikacji jak gauge
 
             loadingBar.Tooltip = null; // Usunięcie tooltipa
+            loadingBar.MaxAngle = 360; // Początkowy kąt
             loadingBar.Series = series;
-            loadingBar.MaxAngle = 0; // Początkowy kąt
             loadingBar.InitialRotation = -90; // Początkowy obrót
         }
 
         private void SetProgress()
         {
-            loadingBar.MaxAngle = (double)progress / 100 * 360;
-            progressLabel.Text = $"{progress}%";
+            //loadingBar.MaxAngle = (double)progress / 100 * 360;
+            progressLabel.Invoke(new Action(() =>
+            {
+                progressLabel.Text = $"{progress}%";
 
-            if (progress == 100)
-                progressLabel.Location = new Point(132, 269);
-            else if (progress >= 0 && progress < 10)
-                progressLabel.Location = new Point(148, 269);
-            else
-                progressLabel.Location = new Point(142, 269);
+                if (progress == 100)
+                    progressLabel.Location = new Point(132, progressLabel.Location.Y);
+                else if (progress >= 0 && progress < 10)
+                    progressLabel.Location = new Point(148, progressLabel.Location.Y);
+                else
+                    progressLabel.Location = new Point(142, progressLabel.Location.Y);
+            }));
         }
 
         public void Exit()
         {
-            Application.Exit();
+            Invoke(Close);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Progress = 100;
         }
     }
 }

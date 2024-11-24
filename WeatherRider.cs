@@ -15,11 +15,16 @@ namespace Weather_Rider
 {
     public partial class WeatherRider : Form
     {
+        private Loading loadingForm = new();
+
+
         public WeatherRider()
         {
             Debug.WriteLine("WeatherRider constructor called");
             InitializeComponent();
             Debug.WriteLine("Components initialized");
+
+            Application.Run(loadingForm);
         }
 
         private void LoadApp(object sender, EventArgs e)
@@ -28,14 +33,29 @@ namespace Weather_Rider
             //Debug.WriteLine(WeatherAPI.GetPlaceByName("EPWA").Lat);
             WeatherAPI weatherAPI = new(new(52.5889, 20.8055));
 
+            bool isException = false;
+
             try
             {
                 weatherAPI.Update();
+                throw new HttpSenderErrorException("Test error");
             }
             catch (HttpSenderErrorException ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Environment.Exit(0x00000001);
+                isException = true;
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                MessageBox.Show($"There is most likely a time mismatch issue.\n{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                isException = true;
+            }
+
+            if(isException)
+            {
+                Application.Exit();
+                Environment.Exit(1);
+                return;
             }
 
             // Displaying all data
@@ -92,8 +112,13 @@ namespace Weather_Rider
                     {
                         (object? data, string unit) = value;
                         string toReplace = isUnit ? unit : CustomFormatter(key, data?.ToString() ?? string.Empty);
+
+                        // If there is no data, set it to "N/A" (data only)
                         if (toReplace == string.Empty && !isUnit)
                             toReplace = "N/A";
+                        // If the date is "N/A" then we do not display the unit (set it to string.Empty)
+                        if (CustomFormatter(key, data?.ToString() ?? string.Empty) == string.Empty && isUnit)
+                            toReplace = string.Empty;
 
                         Debug.WriteLine($"Replacing {match} with {toReplace}");
                         label.Text = label.Text.Replace(match.ToString(), toReplace);

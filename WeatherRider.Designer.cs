@@ -59,12 +59,10 @@
             advancedAtmosphericData = new GroupBox();
             advancedData_data = new Label();
             advancedData_description = new Label();
-            readOnlyRichTextBox1 = new ReadOnlyRichTextBox();
             generalData.SuspendLayout();
             dailyData.SuspendLayout();
             windData.SuspendLayout();
             radiationData.SuspendLayout();
-            airqualityData.SuspendLayout();
             altitudesData.SuspendLayout();
             altitudesDataTable.SuspendLayout();
             advancedAtmosphericData.SuspendLayout();
@@ -196,7 +194,6 @@
             // 
             // airqualityData
             // 
-            airqualityData.Controls.Add(readOnlyRichTextBox1);
             airqualityData.Location = new Point(1109, 92);
             airqualityData.Name = "airqualityData";
             airqualityData.Size = new Size(311, 341);
@@ -410,13 +407,6 @@
             advancedData_description.TabIndex = 0;
             advancedData_description.Text = "CAPE\r\nEvapotranspiration\r\nReference evapotranspiration (ETo)\r\nVapour pressure deficyt (VPD)\r\nIntegrated Water Vapour (IWV)\r\nBoundary layer height\r\nConvective inhibition";
             // 
-            // readOnlyRichTextBox1
-            // 
-            readOnlyRichTextBox1.BorderStyle = BorderStyle.None;
-            readOnlyRichTextBox1.Location = new Point(56, 74);
-            readOnlyRichTextBox1.Name = "readOnlyRichTextBox1";
-            readOnlyRichTextBox1.Size = new Size(100, 96);
-            // 
             // WeatherRider
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -445,7 +435,6 @@
             windData.PerformLayout();
             radiationData.ResumeLayout(false);
             radiationData.PerformLayout();
-            airqualityData.ResumeLayout(false);
             altitudesData.ResumeLayout(false);
             altitudesDataTable.ResumeLayout(false);
             altitudesDataTable.PerformLayout();
@@ -465,7 +454,6 @@
         private GroupBox cloudData;
         private GroupBox altitudesData;
         private GroupBox advancedAtmosphericData;
-        private TableLayoutPanel atmosphericDataTable;
         private Label general_data;
         private Label general_description;
         private Label daily_description;
@@ -487,6 +475,5 @@
         private Label humidity_1000hPa;
         private Label temperature_1000hPa;
         private Label atlitude_1000hPa;
-        private ReadOnlyRichTextBox readOnlyRichTextBox1;
     }
 }

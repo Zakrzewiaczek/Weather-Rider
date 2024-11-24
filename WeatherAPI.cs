@@ -100,7 +100,7 @@ namespace Weather_Rider
             // Checking errors
             if (json["error"]?.ToString() != null)
                 throw new HttpSenderErrorException(json["reason"]?.ToString());
-            
+
 
             json = json[dataKey]?.ToObject<JObject>() ?? [];
             var times = json["time"]?.ToObject<List<DateTime>>() ?? [];

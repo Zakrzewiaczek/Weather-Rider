@@ -28,95 +28,88 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Loading));
             progressLabel = new Label();
-            pictureBox1 = new PictureBox();
-            button1 = new Button();
-            pieChart1 = new LiveChartsCore.SkiaSharpView.WinForms.PieChart();
+            animatedLogo = new PictureBox();
             title = new Label();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            loadingBar = new LiveChartsCore.SkiaSharpView.WinForms.PieChart();
+            ((System.ComponentModel.ISupportInitialize)animatedLogo).BeginInit();
             SuspendLayout();
             // 
             // progressLabel
             // 
             progressLabel.AutoSize = true;
             progressLabel.Font = new Font("Segoe UI", 22F, FontStyle.Bold);
-            progressLabel.Location = new Point(148, 318);
+            progressLabel.Location = new Point(148, 338);
             progressLabel.Name = "progressLabel";
             progressLabel.Size = new Size(61, 41);
             progressLabel.TabIndex = 2;
             progressLabel.Text = "0%";
             progressLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // pictureBox1
+            // animatedLogo
             // 
-            pictureBox1.Image = Properties.Resources.snowflake_animated1;
-            pictureBox1.Location = new Point(98, 80);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(150, 150);
-            pictureBox1.TabIndex = 3;
-            pictureBox1.TabStop = false;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(274, 111);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 4;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
-            // 
-            // pieChart1
-            // 
-            pieChart1.InitialRotation = 0D;
-            pieChart1.IsClockwise = true;
-            pieChart1.Location = new Point(65, 229);
-            pieChart1.MaxAngle = 360D;
-            pieChart1.MaxValue = null;
-            pieChart1.MinValue = 0D;
-            pieChart1.Name = "pieChart1";
-            pieChart1.Size = new Size(220, 220);
-            pieChart1.TabIndex = 5;
+            animatedLogo.BackColor = Color.Transparent;
+            animatedLogo.Image = Properties.Resources.snowflake_animated;
+            animatedLogo.Location = new Point(100, 88);
+            animatedLogo.Name = "animatedLogo";
+            animatedLogo.Size = new Size(150, 150);
+            animatedLogo.TabIndex = 3;
+            animatedLogo.TabStop = false;
             // 
             // title
             // 
             title.AutoSize = true;
             title.Font = new Font("Segoe UI", 27.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            title.Location = new Point(45, 18);
+            title.Location = new Point(45, 17);
             title.Name = "title";
             title.Size = new Size(262, 50);
             title.TabIndex = 6;
             title.Text = "WeatherRider";
+            // 
+            // loadingBar
+            // 
+            loadingBar.BackColor = Color.White;
+            loadingBar.InitialRotation = 0D;
+            loadingBar.IsClockwise = true;
+            loadingBar.Location = new Point(65, 249);
+            loadingBar.MaxAngle = 360D;
+            loadingBar.MaxValue = null;
+            loadingBar.MinValue = 0D;
+            loadingBar.Name = "loadingBar";
+            loadingBar.Size = new Size(220, 220);
+            loadingBar.TabIndex = 8;
             // 
             // Loading
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(350, 450);
+            ClientSize = new Size(350, 475);
             ControlBox = false;
             Controls.Add(title);
-            Controls.Add(button1);
-            Controls.Add(pictureBox1);
+            Controls.Add(animatedLogo);
             Controls.Add(progressLabel);
-            Controls.Add(pieChart1);
+            Controls.Add(loadingBar);
             FormBorderStyle = FormBorderStyle.None;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "Loading";
+            ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Loading";
             TopMost = true;
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            Load += Loading_Load;
+            ((System.ComponentModel.ISupportInitialize)animatedLogo).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
         private Label progressLabel;
-        private PictureBox pictureBox1;
-        private Button button1;
-        private LiveChartsCore.SkiaSharpView.WinForms.PieChart pieChart1;
+        private PictureBox animatedLogo;
         private Label title;
+        private LiveChartsCore.SkiaSharpView.WinForms.PieChart loadingBar;
     }
 }

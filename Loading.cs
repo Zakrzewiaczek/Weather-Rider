@@ -44,22 +44,23 @@ namespace Weather_Rider
                 new PieSeries<int>
                 {
                     Values = [1],
-                    InnerRadius = 60, // Wcięcie od środka
-                    Fill = new SolidColorPaint(SKColors.DeepSkyBlue) // Kolor wykresu na niebieski
+                    InnerRadius = 63, // Wcięcie od środka
+                    //Fill = new SolidColorPaint(new SKColor(0x00, 0xBF, 0xFF)) // Kolor wykresu na niebieski (RGB)
+                    Fill = new SolidColorPaint(SKColor.Parse("#052A75")) // Kolor wykresu na niebieski (HEX)
                 }
             ];
 
             // Zrobić ładowanie się aplikacji jak gauge
 
             loadingBar.Tooltip = null; // Usunięcie tooltipa
-            loadingBar.MaxAngle = 360; // Początkowy kąt
+            loadingBar.MaxAngle = 0; // Początkowy kąt
             loadingBar.Series = series;
             loadingBar.InitialRotation = -90; // Początkowy obrót
         }
 
         private void SetProgress()
         {
-            //loadingBar.MaxAngle = (double)progress / 100 * 360;
+            loadingBar.MaxAngle = (double)progress / 100 * 360;
             progressLabel.Invoke(new Action(() =>
             {
                 progressLabel.Text = $"{progress}%";
@@ -76,11 +77,6 @@ namespace Weather_Rider
         public void Exit()
         {
             Invoke(Close);
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Progress = 100;
         }
     }
 }

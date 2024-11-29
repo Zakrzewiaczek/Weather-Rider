@@ -29,7 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WeatherRider));
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             header = new Panel();
+            hr_header = new Panel();
             generalData = new GroupBox();
             general_data = new Label();
             general_description = new Label();
@@ -45,36 +47,42 @@
             airqualityData = new GroupBox();
             cloudData = new GroupBox();
             altitudesData = new GroupBox();
-            altitudesDataTable = new TableLayoutPanel();
-            windDirection_1000hPa = new Label();
-            windSpeed_1000hPa = new Label();
-            humidity_1000hPa = new Label();
-            temperature_1000hPa = new Label();
-            tableAtlitudeTitle = new Label();
-            tableDirectionTitle = new Label();
-            tableSpeedTitle = new Label();
-            tableHumidityTitle = new Label();
-            tableTempTitle = new Label();
-            atlitude_1000hPa = new Label();
+            altitudesDataGridView = new DataGridView();
+            atlitude = new DataGridViewTextBoxColumn();
+            temperature = new DataGridViewTextBoxColumn();
+            relative_humidity = new DataGridViewTextBoxColumn();
+            wind_speed = new DataGridViewTextBoxColumn();
+            wind_direction = new DataGridViewTextBoxColumn();
             advancedAtmosphericData = new GroupBox();
             advancedData_data = new Label();
             advancedData_description = new Label();
+            header.SuspendLayout();
             generalData.SuspendLayout();
             dailyData.SuspendLayout();
             windData.SuspendLayout();
             radiationData.SuspendLayout();
             altitudesData.SuspendLayout();
-            altitudesDataTable.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)altitudesDataGridView).BeginInit();
             advancedAtmosphericData.SuspendLayout();
             SuspendLayout();
             // 
             // header
             // 
+            header.Controls.Add(hr_header);
             header.Dock = DockStyle.Top;
             header.Location = new Point(0, 0);
             header.Name = "header";
             header.Size = new Size(1432, 86);
             header.TabIndex = 0;
+            // 
+            // hr_header
+            // 
+            hr_header.BackColor = Color.FromArgb(5, 42, 117);
+            hr_header.Dock = DockStyle.Bottom;
+            hr_header.Location = new Point(0, 83);
+            hr_header.Name = "hr_header";
+            hr_header.Size = new Size(1432, 3);
+            hr_header.TabIndex = 0;
             // 
             // generalData
             // 
@@ -212,7 +220,7 @@
             // 
             // altitudesData
             // 
-            altitudesData.Controls.Add(altitudesDataTable);
+            altitudesData.Controls.Add(altitudesDataGridView);
             altitudesData.Location = new Point(317, 376);
             altitudesData.Name = "altitudesData";
             altitudesData.Size = new Size(786, 455);
@@ -220,163 +228,87 @@
             altitudesData.TabStop = false;
             altitudesData.Text = "Data at different heights";
             // 
-            // altitudesDataTable
+            // altitudesDataGridView
             // 
-            altitudesDataTable.ColumnCount = 5;
-            altitudesDataTable.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 200F));
-            altitudesDataTable.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            altitudesDataTable.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            altitudesDataTable.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            altitudesDataTable.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            altitudesDataTable.Controls.Add(windDirection_1000hPa, 4, 1);
-            altitudesDataTable.Controls.Add(windSpeed_1000hPa, 3, 1);
-            altitudesDataTable.Controls.Add(humidity_1000hPa, 2, 1);
-            altitudesDataTable.Controls.Add(temperature_1000hPa, 1, 1);
-            altitudesDataTable.Controls.Add(tableAtlitudeTitle, 0, 0);
-            altitudesDataTable.Controls.Add(tableDirectionTitle, 4, 0);
-            altitudesDataTable.Controls.Add(tableSpeedTitle, 3, 0);
-            altitudesDataTable.Controls.Add(tableHumidityTitle, 2, 0);
-            altitudesDataTable.Controls.Add(tableTempTitle, 1, 0);
-            altitudesDataTable.Controls.Add(atlitude_1000hPa, 0, 1);
-            altitudesDataTable.Location = new Point(19, 30);
-            altitudesDataTable.Name = "altitudesDataTable";
-            altitudesDataTable.RowCount = 2;
-            altitudesDataTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 38F));
-            altitudesDataTable.RowStyles.Add(new RowStyle());
-            altitudesDataTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            altitudesDataTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            altitudesDataTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            altitudesDataTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            altitudesDataTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            altitudesDataTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            altitudesDataTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            altitudesDataTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            altitudesDataTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            altitudesDataTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            altitudesDataTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            altitudesDataTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            altitudesDataTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            altitudesDataTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            altitudesDataTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            altitudesDataTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            altitudesDataTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            altitudesDataTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            altitudesDataTable.Size = new Size(750, 419);
-            altitudesDataTable.TabIndex = 0;
+            altitudesDataGridView.AllowUserToAddRows = false;
+            altitudesDataGridView.AllowUserToDeleteRows = false;
+            altitudesDataGridView.AllowUserToResizeColumns = false;
+            altitudesDataGridView.AllowUserToResizeRows = false;
+            altitudesDataGridView.BackgroundColor = Color.White;
+            altitudesDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            altitudesDataGridView.Columns.AddRange(new DataGridViewColumn[] { atlitude, temperature, relative_humidity, wind_speed, wind_direction });
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.White;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = Color.White;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            altitudesDataGridView.DefaultCellStyle = dataGridViewCellStyle1;
+            altitudesDataGridView.EditMode = DataGridViewEditMode.EditOnEnter;
+            altitudesDataGridView.Location = new Point(19, 29);
+            altitudesDataGridView.MultiSelect = false;
+            altitudesDataGridView.Name = "altitudesDataGridView";
+            altitudesDataGridView.ReadOnly = true;
+            altitudesDataGridView.RowHeadersVisible = false;
+            altitudesDataGridView.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            altitudesDataGridView.ScrollBars = ScrollBars.Vertical;
+            altitudesDataGridView.ShowCellErrors = false;
+            altitudesDataGridView.ShowCellToolTips = false;
+            altitudesDataGridView.ShowEditingIcon = false;
+            altitudesDataGridView.ShowRowErrors = false;
+            altitudesDataGridView.Size = new Size(750, 408);
+            altitudesDataGridView.TabIndex = 0;
             // 
-            // windDirection_1000hPa
+            // atlitude
             // 
-            windDirection_1000hPa.AutoSize = true;
-            windDirection_1000hPa.Dock = DockStyle.Fill;
-            windDirection_1000hPa.Location = new Point(614, 48);
-            windDirection_1000hPa.Margin = new Padding(3, 10, 3, 0);
-            windDirection_1000hPa.Name = "windDirection_1000hPa";
-            windDirection_1000hPa.Size = new Size(133, 371);
-            windDirection_1000hPa.TabIndex = 11;
-            windDirection_1000hPa.Text = "{wind_direction_1000hPa.data} {wind_direction_1000hPa.unit}";
-            windDirection_1000hPa.TextAlign = ContentAlignment.TopCenter;
+            atlitude.Frozen = true;
+            atlitude.HeaderText = "Atlitude";
+            atlitude.Name = "atlitude";
+            atlitude.ReadOnly = true;
+            atlitude.Resizable = DataGridViewTriState.False;
+            atlitude.SortMode = DataGridViewColumnSortMode.NotSortable;
+            atlitude.Width = 230;
             // 
-            // windSpeed_1000hPa
+            // temperature
             // 
-            windSpeed_1000hPa.AutoSize = true;
-            windSpeed_1000hPa.Dock = DockStyle.Fill;
-            windSpeed_1000hPa.Location = new Point(477, 48);
-            windSpeed_1000hPa.Margin = new Padding(3, 10, 3, 0);
-            windSpeed_1000hPa.Name = "windSpeed_1000hPa";
-            windSpeed_1000hPa.Size = new Size(131, 371);
-            windSpeed_1000hPa.TabIndex = 10;
-            windSpeed_1000hPa.Text = "{wind_speed_1000hPa.data} {wind_speed_1000hPa.unit}";
-            windSpeed_1000hPa.TextAlign = ContentAlignment.TopCenter;
+            temperature.Frozen = true;
+            temperature.HeaderText = "Temperature";
+            temperature.Name = "temperature";
+            temperature.ReadOnly = true;
+            temperature.Resizable = DataGridViewTriState.False;
+            temperature.SortMode = DataGridViewColumnSortMode.NotSortable;
+            temperature.Width = 130;
             // 
-            // humidity_1000hPa
+            // relative_humidity
             // 
-            humidity_1000hPa.AutoSize = true;
-            humidity_1000hPa.Dock = DockStyle.Fill;
-            humidity_1000hPa.Location = new Point(340, 48);
-            humidity_1000hPa.Margin = new Padding(3, 10, 3, 0);
-            humidity_1000hPa.Name = "humidity_1000hPa";
-            humidity_1000hPa.Size = new Size(131, 371);
-            humidity_1000hPa.TabIndex = 9;
-            humidity_1000hPa.Text = "{relative_humidity_1000hPa.data} {relative_humidity_1000hPa.unit}";
-            humidity_1000hPa.TextAlign = ContentAlignment.TopCenter;
+            relative_humidity.Frozen = true;
+            relative_humidity.HeaderText = "Relative Humidity";
+            relative_humidity.Name = "relative_humidity";
+            relative_humidity.ReadOnly = true;
+            relative_humidity.Resizable = DataGridViewTriState.False;
+            relative_humidity.SortMode = DataGridViewColumnSortMode.NotSortable;
+            relative_humidity.Width = 130;
             // 
-            // temperature_1000hPa
+            // wind_speed
             // 
-            temperature_1000hPa.AutoSize = true;
-            temperature_1000hPa.Dock = DockStyle.Fill;
-            temperature_1000hPa.Location = new Point(203, 48);
-            temperature_1000hPa.Margin = new Padding(3, 10, 3, 0);
-            temperature_1000hPa.Name = "temperature_1000hPa";
-            temperature_1000hPa.Size = new Size(131, 371);
-            temperature_1000hPa.TabIndex = 8;
-            temperature_1000hPa.Text = "{temperature_1000hPa.data} {temperature_1000hPa.unit}";
-            temperature_1000hPa.TextAlign = ContentAlignment.TopCenter;
+            wind_speed.Frozen = true;
+            wind_speed.HeaderText = "Wind speed";
+            wind_speed.Name = "wind_speed";
+            wind_speed.ReadOnly = true;
+            wind_speed.Resizable = DataGridViewTriState.False;
+            wind_speed.SortMode = DataGridViewColumnSortMode.NotSortable;
+            wind_speed.Width = 130;
             // 
-            // tableAtlitudeTitle
+            // wind_direction
             // 
-            tableAtlitudeTitle.AutoSize = true;
-            tableAtlitudeTitle.Dock = DockStyle.Fill;
-            tableAtlitudeTitle.Location = new Point(3, 0);
-            tableAtlitudeTitle.Name = "tableAtlitudeTitle";
-            tableAtlitudeTitle.Size = new Size(194, 38);
-            tableAtlitudeTitle.TabIndex = 6;
-            tableAtlitudeTitle.Text = "Atlitude";
-            tableAtlitudeTitle.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // tableDirectionTitle
-            // 
-            tableDirectionTitle.AutoSize = true;
-            tableDirectionTitle.Dock = DockStyle.Fill;
-            tableDirectionTitle.Location = new Point(614, 0);
-            tableDirectionTitle.Name = "tableDirectionTitle";
-            tableDirectionTitle.Size = new Size(133, 38);
-            tableDirectionTitle.TabIndex = 4;
-            tableDirectionTitle.Text = "Wind direction";
-            tableDirectionTitle.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // tableSpeedTitle
-            // 
-            tableSpeedTitle.AutoSize = true;
-            tableSpeedTitle.Dock = DockStyle.Fill;
-            tableSpeedTitle.Location = new Point(477, 0);
-            tableSpeedTitle.Name = "tableSpeedTitle";
-            tableSpeedTitle.Size = new Size(131, 38);
-            tableSpeedTitle.TabIndex = 3;
-            tableSpeedTitle.Text = "Wind speed";
-            tableSpeedTitle.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // tableHumidityTitle
-            // 
-            tableHumidityTitle.AutoSize = true;
-            tableHumidityTitle.Dock = DockStyle.Fill;
-            tableHumidityTitle.Location = new Point(340, 0);
-            tableHumidityTitle.Name = "tableHumidityTitle";
-            tableHumidityTitle.Size = new Size(131, 38);
-            tableHumidityTitle.TabIndex = 2;
-            tableHumidityTitle.Text = "Relative humidity";
-            tableHumidityTitle.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // tableTempTitle
-            // 
-            tableTempTitle.AutoSize = true;
-            tableTempTitle.Dock = DockStyle.Fill;
-            tableTempTitle.Location = new Point(203, 0);
-            tableTempTitle.Name = "tableTempTitle";
-            tableTempTitle.Size = new Size(131, 38);
-            tableTempTitle.TabIndex = 0;
-            tableTempTitle.Text = "Temperature";
-            tableTempTitle.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // atlitude_1000hPa
-            // 
-            atlitude_1000hPa.AutoSize = true;
-            atlitude_1000hPa.Dock = DockStyle.Fill;
-            atlitude_1000hPa.Location = new Point(50, 48);
-            atlitude_1000hPa.Margin = new Padding(50, 10, 3, 0);
-            atlitude_1000hPa.Name = "atlitude_1000hPa";
-            atlitude_1000hPa.Size = new Size(147, 371);
-            atlitude_1000hPa.TabIndex = 5;
-            atlitude_1000hPa.Text = resources.GetString("atlitude_1000hPa.Text");
+            wind_direction.Frozen = true;
+            wind_direction.HeaderText = "Wind direction";
+            wind_direction.Name = "wind_direction";
+            wind_direction.ReadOnly = true;
+            wind_direction.Resizable = DataGridViewTriState.False;
+            wind_direction.SortMode = DataGridViewColumnSortMode.NotSortable;
+            wind_direction.Width = 130;
             // 
             // advancedAtmosphericData
             // 
@@ -423,10 +355,13 @@
             Controls.Add(generalData);
             Controls.Add(header);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "WeatherRider";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Weather Rider";
             WindowState = FormWindowState.Minimized;
+            header.ResumeLayout(false);
             generalData.ResumeLayout(false);
             generalData.PerformLayout();
             dailyData.ResumeLayout(false);
@@ -436,8 +371,7 @@
             radiationData.ResumeLayout(false);
             radiationData.PerformLayout();
             altitudesData.ResumeLayout(false);
-            altitudesDataTable.ResumeLayout(false);
-            altitudesDataTable.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)altitudesDataGridView).EndInit();
             advancedAtmosphericData.ResumeLayout(false);
             advancedAtmosphericData.PerformLayout();
             ResumeLayout(false);
@@ -464,16 +398,12 @@
         private Label wind_description;
         private Label sun_data;
         private Label sun_description;
-        private TableLayoutPanel altitudesDataTable;
-        private Label tableTempTitle;
-        private Label tableDirectionTitle;
-        private Label tableSpeedTitle;
-        private Label tableHumidityTitle;
-        private Label tableAtlitudeTitle;
-        private Label windDirection_1000hPa;
-        private Label windSpeed_1000hPa;
-        private Label humidity_1000hPa;
-        private Label temperature_1000hPa;
-        private Label atlitude_1000hPa;
+        private Panel hr_header;
+        private DataGridView altitudesDataGridView;
+        private DataGridViewTextBoxColumn atlitude;
+        private DataGridViewTextBoxColumn temperature;
+        private DataGridViewTextBoxColumn relative_humidity;
+        private DataGridViewTextBoxColumn wind_speed;
+        private DataGridViewTextBoxColumn wind_direction;
     }
 }

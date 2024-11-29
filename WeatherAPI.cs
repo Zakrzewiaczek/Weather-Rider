@@ -5,6 +5,8 @@ using System.Xml.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
+using static Weather_Rider.WeatherAPI;
+
 namespace Weather_Rider
 {
     public struct Place(double lat, double lon)
@@ -43,14 +45,42 @@ namespace Weather_Rider
      * 
      */
 
-    public class WeatherAPI(Place place)
+    public class WeatherAPI(Place place, FormatterDelegate formatterFunction)
     {
         public Place Place { get => place; set => place = value; }
 
         private readonly Dictionary<string, string> units = [];
-        public Dictionary<string, (object data, string unit)> AllData => allData;
+
+        public (string data, string unit) GetData(string key)
+        {
+            if (!allData.TryGetValue(key, out (object data, string unit) value))
+                throw new KeyNotFoundException($"Key '{key}' not found in data.");
+
+            (string? data, string? unit) = (value.data?.ToString(), value.unit?.ToString());
+            (data, unit) = formatterFunction?.Invoke(key, data, unit) ?? (data ?? "N/A", unit ?? string.Empty);
+
+            return (data ?? "N/A", unit ?? string.Empty);
+        }
+        public bool TryGetData(string key, out (string data, string unit) output)
+        {
+            if (!allData.TryGetValue(key, out (object data, string unit) value))
+            {
+                output = ("N/A", string.Empty);
+                return false;
+            }
+
+            (string? data, string? unit) = (value.data?.ToString(), value.unit?.ToString());
+            (data, unit) = formatterFunction?.Invoke(key, data, unit) ?? (data ?? "N/A", unit ?? string.Empty);
+
+            output = (data ?? "N/A", unit ?? string.Empty);
+            return true;
+        }
+
         private readonly Dictionary<string, (object data, string unit)> allData = [];
 
+
+        public delegate ValueTuple<string, string> FormatterDelegate(string key, string? value, string? unit);
+        public FormatterDelegate FormatterFunction { get => formatterFunction; set => formatterFunction = value; }
 
         public void Update()
         {

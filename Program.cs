@@ -5,6 +5,9 @@ namespace Weather_Rider
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
+
+        internal static readonly Loading loadingForm = new();
+
         [STAThread]
         static void Main()
         {

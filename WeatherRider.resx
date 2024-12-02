@@ -120,9 +120,6 @@
   <metadata name="header.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="generalData.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="general_data.Text" xml:space="preserve">
     <value>{temperature_2m.data} {temperature_2m.unit}
 {apparent_temperature.data} {apparent_temperature.unit}
@@ -140,9 +137,6 @@
 {visibility.data} {visibility.unit}
 {lightning_potential.data} {lightning_potential.unit}</value>
   </data>
-  <metadata name="general_description.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="general_description.Text" xml:space="preserve">
     <value>Current temp.
 Current apparent temp.
@@ -160,12 +154,6 @@ Freezing level height
 Visibility
 Lightning potential</value>
   </data>
-  <metadata name="dailyData.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="daily_data.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="daily_data.Text" xml:space="preserve">
     <value>{temperature_2m_min.data} {temperature_2m_min.unit}
 {temperature_2m_max.data} {temperature_2m_max.unit}
@@ -183,9 +171,6 @@ Lightning potential</value>
 {wind_direction_10m_dominant.data} {wind_direction_10m_dominant.unit}
 {shortwave_radiation_sum.data} {shortwave_radiation_sum.unit}</value>
   </data>
-  <metadata name="daily_description.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="daily_description.Text" xml:space="preserve">
     <value>Min. temperature (2m)
 Max. temperature (2m)
@@ -203,55 +188,14 @@ Max. wind gusts (10m)
 Max. wind direction (10m)
 Shortwave radiation sum</value>
   </data>
-  <metadata name="windData.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="radiationData.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="sun_data.Text" xml:space="preserve">
     <value>{shortwave_radiation_instant.data} {shortwave_radiation_instant.unit}
 {direct_radiation_instant.data} {direct_radiation_instant.unit}
 {diffuse_radiation_instant.data} {diffuse_radiation_instant.unit}
 {direct_normal_irradiance_instant.data} {direct_normal_irradiance_instant.unit}
 {global_tilted_irradiance_instant.data} {global_tilted_irradiance_instant.unit}
-{terrestrial_radiation_instant.data} {terrestrial_radiation_instant.unit}
-
-
-
-
-
-
-
-{uv_index.data} {uv_index.unit}
-{uv_index_clear_sky.data} {uv_index_clear_sky.unit}</value>
+{terrestrial_radiation_instant.data} {terrestrial_radiation_instant.unit}</value>
   </data>
-  <data name="sun_description.Text" xml:space="preserve">
-    <value>Shortwave radiation
-Direct sky radiation
-Diffuse sky radiation
-Direct Normal Irradiance (DNI)
-Global Tilted Irradiation/Irradiance (GTI)
-Terrestrial radiation
-
-
-
-
-
-
-
-UV index
-UV index (clear sky)</value>
-  </data>
-  <metadata name="airqualityData.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="cloudData.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="altitudesData.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <metadata name="atlitude.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -267,12 +211,6 @@ UV index (clear sky)</value>
   <metadata name="wind_direction.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="advancedAtmosphericData.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="advancedData_data.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="advancedData_data.Text" xml:space="preserve">
     <value>{cape.data} {cape.unit}
 {evapotranspiration.data} {evapotranspiration.unit}
@@ -282,9 +220,6 @@ UV index (clear sky)</value>
 {boundary_layer_height.data} {boundary_layer_height.unit}
 {convective_inhibition.data} {convective_inhibition.unit}</value>
   </data>
-  <metadata name="advancedData_description.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

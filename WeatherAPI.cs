@@ -1,4 +1,7 @@
-﻿using System.Diagnostics;
+﻿#define READ_DATA_FROM_FILE
+//#define DOWNLOAD_DATA_TO_FILES
+
+using System.Diagnostics;
 using System.Globalization;
 using System.Xml.Linq;
 
@@ -199,7 +202,10 @@ namespace Weather_Rider
             Debug.WriteLine("weather: " + weatherDataURI);
             Debug.WriteLine("aqi: " + aqiDataURI);
             Debug.WriteLine("Downloading data from server: ");
-            /*using (HttpClient client = new())
+
+#if !READ_DATA_FROM_FILE && !DOWNLOAD_DATA_TO_FILES
+
+            using (HttpClient client = new())
             {
                 Task weatherDataDownloading = Task.Run(async () =>
                 {
@@ -215,10 +221,38 @@ namespace Weather_Rider
                 });
 
                 Task.WaitAll(weatherDataDownloading, aqiDataDownloading);
-            }*/
+            }
+#endif
+
+#if READ_DATA_FROM_FILE
 
             downloadedWeatherData = File.ReadAllText("weather.txt");
             downloadedAQIData = File.ReadAllText("aqi.txt");
+
+#elif DOWNLOAD_DATA_TO_FILES
+            using (HttpClient client = new())
+            {
+                Task weatherDataDownloading = Task.Run(async () =>
+                {
+                    Debug.WriteLine("weather data downloading");
+                    downloadedWeatherData = await client.GetStringAsync(new Uri(weatherDataURI));
+                    Debug.WriteLine("weather data downloading OK");
+                    File.WriteAllText("weather.txt", downloadedWeatherData);
+                });
+                Task aqiDataDownloading = Task.Run(async () =>
+                {
+                    Debug.WriteLine("aqi data downloading");
+                    downloadedAQIData = await client.GetStringAsync(new Uri(aqiDataURI));
+                    Debug.WriteLine("aqi data downloading OK");
+                    File.WriteAllText("aqi.txt", downloadedAQIData);
+                });
+    
+                Task.WaitAll(weatherDataDownloading, aqiDataDownloading);
+                Program.loadingForm.Invoke(() => Program.loadingForm.TopMost = false);
+                MessageBox.Show("Data downloaded", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Environment.Exit(0);
+            }
+#endif
 
             Debug.WriteLine("All data downloaded");
             return (downloadedWeatherData, downloadedAQIData);

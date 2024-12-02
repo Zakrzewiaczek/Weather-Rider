@@ -1,26 +1,23 @@
 using System.Diagnostics;
 
-using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView.Painting;
 using LiveChartsCore.SkiaSharpView.Extensions;
-using LiveChartsCore.SkiaSharpView.WinForms;
 using SkiaSharp;
-using System.DirectoryServices.ActiveDirectory;
 using System.Text.RegularExpressions;
-using System.Xml.Linq;
+using LiveChartsCore.Measure;
+using LiveChartsCore.Defaults;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Weather_Rider
 {
     public partial class WeatherRider : Form
     {
-        private readonly Loading loadingForm = new();
-
+        private readonly Loading loadingForm = Program.loadingForm;
 
         public WeatherRider()
         {
-            
+
             Debug.WriteLine("WeatherRider constructor called");
             InitializeComponent();
             Debug.WriteLine("Components initialized");
@@ -67,6 +64,7 @@ namespace Weather_Rider
                 loadingForm.Progress = 40;
                 SettingUpLabels(weatherAPI);
                 SettingUpaltitudesDataGridView(weatherAPI);
+                SettingUpUVGauges(weatherAPI);
 
                 // Wait for the progress bar to finish
                 await Task.Delay(200);
@@ -84,14 +82,9 @@ namespace Weather_Rider
 
         private void ThrowException(string? description)
         {
-            if (loadingForm.InvokeRequired)
-            {
-                loadingForm.Invoke(new Action(() => ThrowException(description)));
-                return;
-            }
-            loadingForm.TopMost = false;
+            loadingForm.Invoke(() => loadingForm.TopMost = false);
             MessageBox.Show(description, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            loadingForm.Exit();
+            loadingForm.Invoke(loadingForm.Exit);
             Application.Exit();
         }
 
@@ -141,16 +134,136 @@ namespace Weather_Rider
                     {
                         (string data, string unit) = value;
                         string toReplace = isUnit ? unit : data;
-                        
+
                         label.Invoke(() => label.Text = label.Text.Replace(match.ToString(), toReplace));
                     }
                 }
-                new Task(async () => 
+                new Task(async () =>
                 {
                     await Task.Delay(10);
                     loadingForm.Progress += 2;
                 }).Start();
             }
+        }
+        private void SettingUpUVGauges(WeatherAPI weatherAPI)
+        {
+            /*string numberString = number.ToString("G17", System.Globalization.CultureInfo.InvariantCulture);
+
+            // Znalezienie pozycji przecinka
+            int decimalPointIndex = numberString.IndexOf('.');
+
+            // Jeœli nie ma przecinka, liczba nie ma cyfr po przecinku
+            if (decimalPointIndex == -1)
+            {
+                return 0;
+            }
+
+            // Zwrócenie liczby cyfr po przecinku
+            return numberString.Length - decimalPointIndex - 1;*/
+
+
+            #region UV Index
+
+            double UVIndex = -1;
+            if(weatherAPI.TryGetData("uv_index", out var uvIndexData))
+            {
+                if (double.TryParse(uvIndexData.data, out double value))
+                    UVIndex = value;
+            }
+
+            SKColor UVIndexColor = UVIndex switch
+            {
+                < 3 => SKColors.Green,
+                < 6 => SKColors.Yellow,
+                < 8 => SKColors.Orange,
+                < 11 => SKColors.Red,
+                _ => SKColors.Purple
+            };
+            SKColor UVIndexLabelColor = UVIndex switch
+            {
+                < 6 => SKColors.Black,
+                < 8 => SKColors.Orange,
+                < 11 => SKColors.Red,
+                _ => SKColors.Purple
+            };
+
+
+            IEnumerable<ISeries> UVIndexSeries = GaugeGenerator.BuildSolidGauge(
+                new GaugeItem(UVIndex == -1 ? 11 : (UVIndex > 11 ? UVIndex = 11 : UVIndex), series =>
+                {
+                    series.Fill = new SolidColorPaint(UVIndex != -1 ? UVIndexColor : new SKColor(245, 245, 245));
+                    series.DataLabelsSize = 23;
+                    series.DataLabelsPaint = new SolidColorPaint(UVIndex != -1 ? UVIndexLabelColor : SKColors.White);
+                    series.DataLabelsPosition = PolarLabelsPosition.ChartCenter;
+                    series.InnerRadius = 23;
+                }),
+                new GaugeItem(GaugeItem.Background, series =>
+                {
+                    series.InnerRadius = 23;
+                    series.Fill = new SolidColorPaint(new SKColor(235, 235, 235));
+                })
+            );
+
+
+            uv_index_gauge.Tooltip = null;
+            uv_index_gauge.Series = UVIndexSeries;
+            uv_index_gauge.InitialRotation = -225;
+            uv_index_gauge.MaxAngle = 270;
+            uv_index_gauge.MinValue = 0;
+            uv_index_gauge.MaxValue = 11;
+
+            #endregion
+            #region UV Index Clear Sky
+
+            double UVIndexClearSky = -1;
+            if (weatherAPI.TryGetData("uv_index_clear_sky", out var uvIndexClearSkyData))
+            {
+                if (double.TryParse(uvIndexClearSkyData.data, out double value))
+                    UVIndexClearSky = value;
+            }
+
+            SKColor UVIndexClearSkyColor = UVIndexClearSky switch
+            {
+                < 3 => SKColors.Green,
+                < 6 => SKColors.Yellow,
+                < 8 => SKColors.Orange,
+                < 11 => SKColors.Red,
+                _ => SKColors.Purple
+            };
+            SKColor UVIndexClearSkyLabelColor = UVIndexClearSky switch
+            {
+                < 6 => SKColors.Black,
+                < 8 => SKColors.Orange,
+                < 11 => SKColors.Red,
+                _ => SKColors.Purple
+            };
+
+
+            IEnumerable<ISeries> UVIndexClearSkySeries = GaugeGenerator.BuildSolidGauge(
+                new GaugeItem(UVIndexClearSky == -1 ? 11 : (UVIndexClearSky > 11 ? UVIndexClearSky = 11 : UVIndexClearSky), series =>
+                {
+                    series.Fill = new SolidColorPaint(UVIndexClearSky != -1 ? UVIndexClearSkyColor : new SKColor(245, 245, 245));
+                    series.DataLabelsSize = 23;
+                    series.DataLabelsPaint = new SolidColorPaint(UVIndexClearSky != -1 ? UVIndexClearSkyLabelColor : SKColors.White);
+                    series.DataLabelsPosition = PolarLabelsPosition.ChartCenter;
+                    series.InnerRadius = 23;
+                }),
+                new GaugeItem(GaugeItem.Background, series =>
+                {
+                    series.InnerRadius = 23;
+                    series.Fill = new SolidColorPaint(new SKColor(235, 235, 235));
+                })
+            );
+
+
+            uv_index_clear_sky_gauge.Tooltip = null;
+            uv_index_clear_sky_gauge.Series = UVIndexClearSkySeries;
+            uv_index_clear_sky_gauge.InitialRotation = -225;
+            uv_index_clear_sky_gauge.MaxAngle = 270;
+            uv_index_clear_sky_gauge.MinValue = 0;
+            uv_index_clear_sky_gauge.MaxValue = 11;
+
+            #endregion
         }
 
         private void SettingUpaltitudesDataGridView(WeatherAPI weatherAPI)
@@ -160,36 +273,56 @@ namespace Weather_Rider
 
             Debug.WriteLine(suffixes.Length);
 
+            altitudesDataGridView.AdvancedCellBorderStyle.All = DataGridViewAdvancedCellBorderStyle.None;
+            altitudesDataGridView.AdvancedColumnHeadersBorderStyle.All = DataGridViewAdvancedCellBorderStyle.None;
+            altitudesDataGridView.AdvancedRowHeadersBorderStyle.All = DataGridViewAdvancedCellBorderStyle.None;
+            altitudesDataGridView.BorderStyle = BorderStyle.None;
+            altitudesDataGridView.RowTemplate.Height = altitudesDataGridView.Size.Height / (suffixes.Length + 1);
+
             for (int index = 0; index < suffixes.Length; index++)
             {
                 string altitude = $"{suffixes[index]} ({altitudes[index]})";
                 string temperature = weatherAPI.TryGetData($"temperature_{suffixes[index]}", out var tempData) ? $"{tempData.data} {tempData.unit}" : string.Empty;
                 string humidity = weatherAPI.TryGetData($"relative_humidity_{suffixes[index]}", out var humData) ? $"{humData.data} {humData.unit}" : string.Empty;
                 string windSpeed = weatherAPI.TryGetData($"wind_speed_{suffixes[index]}", out var windSpeedData) ? $"{windSpeedData.data} {windSpeedData.unit}" : string.Empty;
-                string windDirection = weatherAPI.TryGetData($"wind_direction_{suffixes[index]}", out var windDirectionData) ? $"{windDirectionData.data} {windDirectionData.unit}" : string.Empty;
-                temperature = (tempData.data?.ToString() ?? string.Empty) == string.Empty ? "N/A" : temperature;
-                humidity = (humData.data?.ToString() ?? string.Empty) == string.Empty ? "N/A" : humidity;
-                windSpeed = (windSpeedData.data?.ToString() ?? string.Empty) == string.Empty ? "N/A" : windSpeed;
-                windDirection = (windDirectionData.data?.ToString() ?? string.Empty) == string.Empty ? "N/A" : windDirection;
+                string windDirection = weatherAPI.TryGetData($"wind_direction_{suffixes[index]}", out var windDirectionData) ? windDirectionData.data : string.Empty;
 
                 altitudesDataGridView.Invoke(() => altitudesDataGridView.Rows.Add(altitude, temperature, humidity, windSpeed, windDirection));
                 Debug.WriteLine(altitude);
             }
-
-            /*
 
             new Task(async () =>
             {
                 await Task.Delay(10);
                 loadingForm.Progress += 2;
             }).Start();
-
-            */
+        }
+        private void OnCellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.RowIndex == -1 && e.ColumnIndex > -1)
+            {
+                e.Handled = true;
+                using (Brush b = new SolidBrush(altitudesDataGridView.ColumnHeadersDefaultCellStyle.BackColor))
+                {
+                    e?.Graphics?.FillRectangle(b, e.CellBounds);
+                }
+                e?.PaintContent(e.ClipBounds);
+            }
+            /*else if (e.RowIndex == 0 && e.ColumnIndex > -1)
+            {
+                e.Handled = true;
+                e.PaintBackground(e.ClipBounds, true);
+                e.PaintContent(e.ClipBounds);
+                using (Pen p = new Pen(altitudesDataGridView.GridColor))
+                {
+                    e?.Graphics?.DrawLine(p, e.CellBounds.Left, e.CellBounds.Top + 5, e.CellBounds.Right, e.CellBounds.Top + 5);
+                }
+            }*/
         }
 
         public static (string data, string unit) CustomFormatter(string key, string? value, string? unit)
         {
-            string? dataOut = null, unitOut = null;
+            string? dataOut = value, unitOut = unit;
             if (value == null || value == string.Empty)
                 return ("N/A", "");
 
@@ -217,30 +350,35 @@ namespace Weather_Rider
                     }
                     break;
 
-                case "wind_direction":
-                    if (double.TryParse(value, out double windDirection))
+                default:
+                    if (key.StartsWith("wind_direction_"))
                     {
-                        string windDirectionSide = windDirection switch
+                        if (double.TryParse(value, out double windDirection))
                         {
-                            >= 348.75 or < 11.25 => "N",
-                            >= 11.25 and < 33.75 => "NNE",
-                            >= 33.75 and < 56.25 => "NE",
-                            >= 56.25 and < 78.75 => "ENE",
-                            >= 78.75 and < 101.25 => "E",
-                            >= 101.25 and < 123.75 => "ESE",
-                            >= 123.75 and < 146.25 => "SE",
-                            >= 146.25 and < 168.75 => "SSE",
-                            >= 168.75 and < 191.25 => "S",
-                            >= 191.25 and < 213.75 => "SSW",
-                            >= 213.75 and < 236.25 => "SW",
-                            >= 236.25 and < 258.75 => "WSW",
-                            >= 258.75 and < 281.25 => "W",
-                            >= 281.25 and < 303.75 => "WNW",
-                            >= 303.75 and < 326.25 => "NW",
-                            >= 326.25 and < 348.75 => "NNW",
-                            _ => "N/A"
-                        };
-                        dataOut = $"{windDirection}° ({windDirectionSide})";
+                            string windDirectionSide = windDirection switch
+                            {
+                                >= 348.75 or < 11.25 => "N",
+                                >= 11.25 and < 33.75 => "NNE",
+                                >= 33.75 and < 56.25 => "NE",
+                                >= 56.25 and < 78.75 => "ENE",
+                                >= 78.75 and < 101.25 => "E",
+                                >= 101.25 and < 123.75 => "ESE",
+                                >= 123.75 and < 146.25 => "SE",
+                                >= 146.25 and < 168.75 => "SSE",
+                                >= 168.75 and < 191.25 => "S",
+                                >= 191.25 and < 213.75 => "SSW",
+                                >= 213.75 and < 236.25 => "SW",
+                                >= 236.25 and < 258.75 => "WSW",
+                                >= 258.75 and < 281.25 => "W",
+                                >= 281.25 and < 303.75 => "WNW",
+                                >= 303.75 and < 326.25 => "NW",
+                                >= 326.25 and < 348.75 => "NNW",
+                                _ => "N/A"
+                            };
+
+                            dataOut = $"{windDirection}{unit} ({windDirectionSide})";
+                            unitOut = string.Empty;
+                        }
                     }
                     break;
             };

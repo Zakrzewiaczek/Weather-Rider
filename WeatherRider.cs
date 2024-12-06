@@ -8,19 +8,22 @@ using System.Text.RegularExpressions;
 using LiveChartsCore.Measure;
 using LiveChartsCore.Defaults;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Globalization;
 
 namespace Weather_Rider
 {
     public partial class WeatherRider : Form
     {
         private readonly Loading loadingForm = Program.loadingForm;
+        private InternetConnectionManagment? internetManager = null;
 
         public WeatherRider()
         {
-
             Debug.WriteLine("WeatherRider constructor called");
             InitializeComponent();
             Debug.WriteLine("Components initialized");
+
+            pictureBox2.Parent = pictureBox1;
 
             Shown += (s, e) => Hide(); // Hide the form until the data is loaded
             LoadApp(); // Load the app (in background)
@@ -62,6 +65,8 @@ namespace Weather_Rider
                 }
 
                 loadingForm.Progress = 40;
+
+                await SettingUpHeaderLabels();
                 SettingUpLabels(weatherAPI);
                 SettingUpaltitudesDataGridView(weatherAPI);
                 SettingUpUVGauges(weatherAPI);
@@ -72,10 +77,19 @@ namespace Weather_Rider
                 await Task.Delay(100);
 
                 // Show the WeatherRider form
-                Invoke(Show);
-                await Task.Delay(300);
-                Invoke(() => WindowState = FormWindowState.Normal);
+                await Invoke(async () =>
+                {
+                    Show();
+                    await Task.Delay(300);
+                    WindowState = FormWindowState.Normal;
+                });
                 loadingForm.Exit();
+
+                new Thread(() =>
+                {
+                    internetManager = new(noInternetIcon);
+                    internetManager.CheckConnection();
+                }).Start();
             });
         }
 
@@ -135,7 +149,7 @@ namespace Weather_Rider
                         (string data, string unit) = value;
                         string toReplace = isUnit ? unit : data;
 
-                        label.Invoke(() => label.Text = label.Text.Replace(match.ToString(), toReplace));
+                        Invoke(() => label.Text = label.Text.Replace(match.ToString(), toReplace));
                     }
                 }
                 new Task(async () =>
@@ -165,7 +179,7 @@ namespace Weather_Rider
             #region UV Index
 
             double UVIndex = -1;
-            if(weatherAPI.TryGetData("uv_index", out var uvIndexData))
+            if (weatherAPI.TryGetData("uv_index", out var uvIndexData))
             {
                 if (double.TryParse(uvIndexData.data, out double value))
                     UVIndex = value;
@@ -287,7 +301,7 @@ namespace Weather_Rider
                 string windSpeed = weatherAPI.TryGetData($"wind_speed_{suffixes[index]}", out var windSpeedData) ? $"{windSpeedData.data} {windSpeedData.unit}" : string.Empty;
                 string windDirection = weatherAPI.TryGetData($"wind_direction_{suffixes[index]}", out var windDirectionData) ? windDirectionData.data : string.Empty;
 
-                altitudesDataGridView.Invoke(() => altitudesDataGridView.Rows.Add(altitude, temperature, humidity, windSpeed, windDirection));
+                Invoke(() => altitudesDataGridView.Rows.Add(altitude, temperature, humidity, windSpeed, windDirection));
                 Debug.WriteLine(altitude);
             }
 
@@ -297,6 +311,33 @@ namespace Weather_Rider
                 loadingForm.Progress += 2;
             }).Start();
         }
+        private async Task SettingUpHeaderLabels()
+        {
+            Place? station = null;
+            await Task.Run(async () =>
+            {
+                var places = await WeatherAPI.GetPlaceByNameAsync(GlobalSettings.Default.WeatherStationICAO);
+                station = places.FirstOrDefault();
+            });
+
+            if (!station.HasValue)
+                throw new InvalidOperationException("Station not found.");
+
+            Invoke(() =>
+            {
+                utc_time_label.Text = Date.GetUTCFromTimezone(Date.GetTimezoneByName(GlobalSettings.Default.Timezone));
+                station_feature_code_label.Text = station.Value.FeatureCode?.Trim();
+                station_ICAO_code_label.Text = GlobalSettings.Default.WeatherStationICAO;
+                country_code_label.Text = station.Value.CountryCode;
+                station_name_label.Text = station.Value.Name;
+
+                string lat = station.Value.Lat.ToString(CultureInfo.InvariantCulture);
+                string lon = station.Value.Lon.ToString(CultureInfo.InvariantCulture);
+                station_position_label.Text = $"Latitude: {lat}°          Longitude: {lon}°";
+            });
+        }
+
+
         private void OnCellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             if (e.RowIndex == -1 && e.ColumnIndex > -1)
@@ -387,6 +428,12 @@ namespace Weather_Rider
                 return ("N/A", "");
 
             return (dataOut, unitOut ?? string.Empty);
+        }
+
+        private void ClosingApplication(object sender, FormClosingEventArgs e)
+        {
+            Debug.WriteLine("Closing application...");
+            new Thread(() => internetManager!.Close());
         }
 
 

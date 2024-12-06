@@ -2,7 +2,7 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Weather_Rider" GeneratedClassName="GlobalSettings">
   <Profiles />
   <Settings>
-    <Setting Name="TimeZone" Type="System.String" Scope="User">
+    <Setting Name="Timezone" Type="System.String" Scope="User">
       <Value Profile="(Default)">Europe/Berlin</Value>
     </Setting>
     <Setting Name="TemperatureUnit" Type="System.String" Scope="User">
@@ -13,6 +13,12 @@
     </Setting>
     <Setting Name="PrecipationUnit" Type="System.String" Scope="User">
       <Value Profile="(Default)">mm</Value>
+    </Setting>
+    <Setting Name="WeatherStationICAO" Type="System.String" Scope="User">
+      <Value Profile="(Default)">EPWA</Value>
+    </Setting>
+    <Setting Name="LastRefresh" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

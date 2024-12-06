@@ -40,7 +40,7 @@
             // 
             progressLabel.AutoSize = true;
             progressLabel.Font = new Font("Segoe UI", 22F, FontStyle.Bold);
-            progressLabel.Location = new Point(148, 338);
+            progressLabel.Location = new Point(148, 337);
             progressLabel.Name = "progressLabel";
             progressLabel.Size = new Size(61, 41);
             progressLabel.TabIndex = 2;
@@ -72,7 +72,7 @@
             loadingBar.BackColor = Color.White;
             loadingBar.InitialRotation = 0D;
             loadingBar.IsClockwise = true;
-            loadingBar.Location = new Point(65, 249);
+            loadingBar.Location = new Point(65, 248);
             loadingBar.MaxAngle = 360D;
             loadingBar.MaxValue = null;
             loadingBar.MinValue = 0D;
@@ -85,6 +85,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
+            BackgroundImage = Properties.Resources.loadingFormBackground;
             ClientSize = new Size(350, 475);
             ControlBox = false;
             Controls.Add(title);

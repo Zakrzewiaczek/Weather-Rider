@@ -26,12 +26,12 @@ namespace Weather_Rider {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Europe/Berlin")]
-        public string TimeZone {
+        public string Timezone {
             get {
-                return ((string)(this["TimeZone"]));
+                return ((string)(this["Timezone"]));
             }
             set {
-                this["TimeZone"] = value;
+                this["Timezone"] = value;
             }
         }
         
@@ -68,6 +68,29 @@ namespace Weather_Rider {
             }
             set {
                 this["PrecipationUnit"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("EPWA")]
+        public string WeatherStationICAO {
+            get {
+                return ((string)(this["WeatherStationICAO"]));
+            }
+            set {
+                this["WeatherStationICAO"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.DateTime LastRefresh {
+            get {
+                return ((global::System.DateTime)(this["LastRefresh"]));
+            }
+            set {
+                this["LastRefresh"] = value;
             }
         }
     }

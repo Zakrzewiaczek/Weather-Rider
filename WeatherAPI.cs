@@ -1,12 +1,15 @@
 ﻿#define READ_DATA_FROM_FILE
 //#define DOWNLOAD_DATA_TO_FILES
 
+using System.Configuration;
 using System.Diagnostics;
 using System.Globalization;
 using System.Xml.Linq;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+
+using OpenTK.Windowing.Common;
 
 using static Weather_Rider.WeatherAPI;
 
@@ -22,6 +25,81 @@ namespace Weather_Rider
         public string? CountryCode { get; set; }
         public string? FeatureCode { get; set; }
     }
+
+    public static class Date
+    {
+        public enum Timezone
+        {
+            America_Anchorage,
+            America_Los_Angeles,
+            America_Denver,
+            America_Chicago,
+            America_New_York,
+            America_Sao_Paulo,
+            GMT_0,
+            Europe_London,
+            Europe_Berlin,
+            Europe_Moscow,
+            Africa_Cairo,
+            Asia_Bangkok,
+            Asia_Singapore,
+            Asia_Tokyo,
+            Australia_Sydney,
+            Pacific_Auckland
+        };
+        private static readonly string[] timezones =
+        [
+            "UTC-9", // America_Anchorage
+            "UTC-8", // America_Los_Angeles
+            "UTC-7", // America_Denver
+            "UTC-6", // America_Chicago
+            "UTC-5", // America_New_York
+            "UTC-3", // America_Sao_Paulo
+            "UTC+0", // GMT_0
+            "UTC+0", // Europe_London
+            "UTC+1", // Europe_Berlin
+            "UTC+3", // Europe_Moscow
+            "UTC+2", // Africa_Cairo
+            "UTC+7", // Asia_Bangkok
+            "UTC+8", // Asia_Singapore
+            "UTC+9", // Asia_Tokyo
+            "UTC+10", // Australia_Sydney
+            "UTC+12"  // Pacific_Auckland
+        ];
+
+        public static string GetTimezoneName(Timezone timezone)
+        {
+            string name = timezone.ToString().Replace("GMT_0", "GMT").Replace("_", "/");
+            return name;
+        }
+        public static string GetUTCFromTimezone(Timezone timezone)
+        {
+            int index = (int)timezone;
+            return timezones[index];
+        }
+        public static Timezone GetTimezoneByName(string name)
+        {
+            name = name.Replace("GMT", "GMT_0").Replace("/", "_");
+            Console.WriteLine($"Szukana nazwa: {name}"); // Debugowanie
+
+            foreach (var timezone in timezones)
+            {
+                Console.WriteLine($"Dostępna strefa czasowa: {timezone}"); // Debugowanie
+            }
+
+            string[] timezoneNames = Enum.GetNames(typeof(Timezone));
+            int index = Array.IndexOf(timezoneNames, name);
+
+            if (index == -1)
+            {
+                throw new ArgumentException($"Timezone not found: {name}");
+            }
+
+            return (Timezone)index;
+        }
+    }
+
+
 
 
     /// <summary>
@@ -169,7 +247,7 @@ namespace Weather_Rider
             [
                 $"latitude={place.Lat.ToString(CultureInfo.InvariantCulture)}",
                 $"longitude={place.Lon.ToString(CultureInfo.InvariantCulture)}",
-                $"timezone={GlobalSettings.Default.TimeZone.Replace("/", "%2F")}",
+                $"timezone={GlobalSettings.Default.Timezone.Replace("/", "%2F")}",
                 GlobalSettings.Default.TemperatureUnit == "F" ? "temperature_unit=fahrenheit" : string.Empty,
                 $"wind_speed_unit={GlobalSettings.Default.WindSpeedUnit.Replace("/", "")}",
                 $"precipitation_unit={GlobalSettings.Default.PrecipationUnit}",
@@ -183,7 +261,7 @@ namespace Weather_Rider
             [
                 $"latitude={place.Lat.ToString(CultureInfo.InvariantCulture)}",
                 $"longitude={place.Lon.ToString(CultureInfo.InvariantCulture)}",
-                $"timezone={GlobalSettings.Default.TimeZone.Replace("/", "%2F")}",
+                $"timezone={GlobalSettings.Default.Timezone.Replace("/", "%2F")}",
                 $"forecast_days=1",
                 $"domains=cams_europe",
                 $"hourly=pm10,pm2_5,carbon_monoxide,carbon_dioxide,nitrogen_dioxide,sulphur_dioxide,ozone,aerosol_optical_depth,dust,ammonia,methane,alder_pollen,birch_pollen,grass_pollen,mugwort_pollen,olive_pollen,ragweed_pollen"
@@ -258,42 +336,60 @@ namespace Weather_Rider
             return (downloadedWeatherData, downloadedAQIData);
         }
 
-        public static Place GetPlaceByName(string name)
+        public static async Task<IEnumerable<Place>> GetPlaceByNameAsync(string name)
         {
-            string uri = $"https://geocoding-api.open-meteo.com/v1/search?count=1&language=en&format=json&name={name}";
-            string jsonData = string.Empty;
+            Debug.WriteLine("Downloading place data");
+
+            string uri = $"https://geocoding-api.open-meteo.com/v1/search?language=en&format=json&name={name}";
+            string jsonData;
+
+            Debug.WriteLine($"Url: {uri}\nDownloading data...");
 
             using (HttpClient client = new())
             {
-                Task.Run(async () =>
+                try
                 {
-                    Debug.WriteLine("Place data downloading");
                     jsonData = await client.GetStringAsync(new Uri(uri));
-                    Debug.WriteLine("Place data downloading OK");
-                }).Wait();
+                }
+                catch (HttpRequestException e)
+                {
+                    // Log and handle network errors
+                    throw new Exception("Network error occurred", e);
+                }
             }
+
+            Debug.WriteLine("\nDownloaded data from server: ");
+            Debug.WriteLine(jsonData);
 
             JObject json = JObject.Parse(jsonData);
 
-            // Checking if the server returned results
             if (json["results"] == null)
-                throw new PlaceNotFound();
-
-
-            JToken results = json["results"]![0]!;
-
-            Place place = new(
-                double.Parse(results["latitude"]!.ToString()),
-                double.Parse(results["longitude"]!.ToString())
-            )
             {
-                Name = results["name"]!.ToString(),
-                ID = results["id"]!.ToString(),
-                CountryCode = results["country_code"]!.ToString(),
-                FeatureCode = results["feature_code"]!.ToString()
-            };
+                // Log the response for debugging
+                Console.WriteLine("No results found for the given name.");
+                throw new PlaceNotFound();
+            }
 
-            return place;
+            List<Place> places = [];
+
+            foreach (var result in json["results"]!)
+            {
+                Place place = new(
+                    double.Parse(result["latitude"]!.ToString()),
+                    double.Parse(result["longitude"]!.ToString())
+                )
+                {
+                    Name = result["name"]?.ToString(),
+                    ID = result["id"]?.ToString(),
+                    CountryCode = result["country_code"]?.ToString(),
+                    FeatureCode = result["feature_code"]?.ToString()
+                };
+                places.Add(place);
+            }
+
+            Debug.WriteLine("Place data downloaded");
+
+            return places;
         }
     }
 }

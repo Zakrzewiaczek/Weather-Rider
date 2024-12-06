@@ -29,13 +29,29 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WeatherRider));
-            DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             header = new Panel();
+            noInternetIcon = new PictureBox();
+            station_data_tableLayoutPanel = new TableLayoutPanel();
+            station_name_label = new Label();
+            left_header_data_panel = new Panel();
+            station_feature_code_panel = new Panel();
+            station_feature_code_label = new Label();
+            station_ICAO_code_panel = new Panel();
+            station_ICAO_code_label = new Label();
+            right_header_data_panel = new Panel();
+            country_code_label = new Label();
+            utc_time_label = new Label();
+            lat_lon_label = new Label();
+            refresh_data_label = new Label();
+            change_station_btn = new Button();
+            refresh_btn = new Button();
+            data_from_label = new Label();
             hr_header = new Panel();
             generalData = new GroupBox();
             general_data = new Label();
@@ -70,16 +86,15 @@
             advancedAtmosphericData = new GroupBox();
             advancedData_data = new Label();
             advancedData_description = new Label();
-            label1 = new Label();
-            data_from_label = new Label();
-            refresh_btn = new Button();
-            change_station_btn = new Button();
-            refresh_data_label = new Label();
-            lat_lon_label = new Label();
-            station_feature_code_label = new Label();
-            country_code_label = new Label();
-            label2 = new Label();
+            station_position_panel = new Panel();
+            station_position_label = new Label();
             header.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)noInternetIcon).BeginInit();
+            station_data_tableLayoutPanel.SuspendLayout();
+            left_header_data_panel.SuspendLayout();
+            station_feature_code_panel.SuspendLayout();
+            station_ICAO_code_panel.SuspendLayout();
+            right_header_data_panel.SuspendLayout();
             generalData.SuspendLayout();
             dailyData.SuspendLayout();
             windData.SuspendLayout();
@@ -91,14 +106,13 @@
             altitudesData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)altitudesDataGridView).BeginInit();
             advancedAtmosphericData.SuspendLayout();
+            station_position_panel.SuspendLayout();
             SuspendLayout();
             // 
             // header
             // 
-            header.Controls.Add(label2);
-            header.Controls.Add(country_code_label);
-            header.Controls.Add(station_feature_code_label);
-            header.Controls.Add(label1);
+            header.Controls.Add(noInternetIcon);
+            header.Controls.Add(station_data_tableLayoutPanel);
             header.Controls.Add(lat_lon_label);
             header.Controls.Add(refresh_data_label);
             header.Controls.Add(change_station_btn);
@@ -108,14 +122,191 @@
             header.Dock = DockStyle.Top;
             header.Location = new Point(0, 0);
             header.Name = "header";
-            header.Size = new Size(1432, 86);
+            header.Size = new Size(1432, 105);
             header.TabIndex = 0;
+            // 
+            // noInternetIcon
+            // 
+            noInternetIcon.BackgroundImage = Properties.Resources.noWifiIcon;
+            noInternetIcon.BackgroundImageLayout = ImageLayout.Zoom;
+            noInternetIcon.Location = new Point(1306, 17);
+            noInternetIcon.Name = "noInternetIcon";
+            noInternetIcon.Size = new Size(25, 25);
+            noInternetIcon.TabIndex = 12;
+            noInternetIcon.TabStop = false;
+            // 
+            // station_data_tableLayoutPanel
+            // 
+            station_data_tableLayoutPanel.ColumnCount = 3;
+            station_data_tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            station_data_tableLayoutPanel.ColumnStyles.Add(new ColumnStyle());
+            station_data_tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            station_data_tableLayoutPanel.Controls.Add(station_name_label, 1, 0);
+            station_data_tableLayoutPanel.Controls.Add(left_header_data_panel, 0, 0);
+            station_data_tableLayoutPanel.Controls.Add(right_header_data_panel, 2, 0);
+            station_data_tableLayoutPanel.Location = new Point(231, 3);
+            station_data_tableLayoutPanel.Name = "station_data_tableLayoutPanel";
+            station_data_tableLayoutPanel.RowCount = 1;
+            station_data_tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            station_data_tableLayoutPanel.Size = new Size(958, 93);
+            station_data_tableLayoutPanel.TabIndex = 11;
+            // 
+            // station_name_label
+            // 
+            station_name_label.AutoSize = true;
+            station_name_label.Dock = DockStyle.Fill;
+            station_name_label.Font = new Font("Segoe UI", 36F, FontStyle.Bold, GraphicsUnit.Point, 238);
+            station_name_label.Location = new Point(310, 0);
+            station_name_label.Name = "station_name_label";
+            station_name_label.Size = new Size(337, 93);
+            station_name_label.TabIndex = 1;
+            station_name_label.Text = "Station Name";
+            station_name_label.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // left_header_data_panel
+            // 
+            left_header_data_panel.Controls.Add(station_feature_code_panel);
+            left_header_data_panel.Controls.Add(station_ICAO_code_panel);
+            left_header_data_panel.Dock = DockStyle.Right;
+            left_header_data_panel.Location = new Point(156, 3);
+            left_header_data_panel.Margin = new Padding(3, 3, 10, 3);
+            left_header_data_panel.Name = "left_header_data_panel";
+            left_header_data_panel.Size = new Size(141, 87);
+            left_header_data_panel.TabIndex = 2;
+            // 
+            // station_feature_code_panel
+            // 
+            station_feature_code_panel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            station_feature_code_panel.Controls.Add(station_feature_code_label);
+            station_feature_code_panel.Location = new Point(19, 44);
+            station_feature_code_panel.Margin = new Padding(0);
+            station_feature_code_panel.Name = "station_feature_code_panel";
+            station_feature_code_panel.Size = new Size(120, 37);
+            station_feature_code_panel.TabIndex = 12;
+            // 
+            // station_feature_code_label
+            // 
+            station_feature_code_label.AutoSize = true;
+            station_feature_code_label.BackColor = Color.White;
+            station_feature_code_label.Dock = DockStyle.Right;
+            station_feature_code_label.Font = new Font("Segoe UI Semibold", 18.25F, FontStyle.Bold);
+            station_feature_code_label.Location = new Point(30, 0);
+            station_feature_code_label.Name = "station_feature_code_label";
+            station_feature_code_label.Size = new Size(90, 35);
+            station_feature_code_label.TabIndex = 7;
+            station_feature_code_label.Text = "XXXXX";
+            station_feature_code_label.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // station_ICAO_code_panel
+            // 
+            station_ICAO_code_panel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            station_ICAO_code_panel.Controls.Add(station_ICAO_code_label);
+            station_ICAO_code_panel.Location = new Point(19, 7);
+            station_ICAO_code_panel.Margin = new Padding(0);
+            station_ICAO_code_panel.Name = "station_ICAO_code_panel";
+            station_ICAO_code_panel.Size = new Size(120, 37);
+            station_ICAO_code_panel.TabIndex = 0;
+            // 
+            // station_ICAO_code_label
+            // 
+            station_ICAO_code_label.AutoSize = true;
+            station_ICAO_code_label.Dock = DockStyle.Right;
+            station_ICAO_code_label.Font = new Font("Segoe UI Semibold", 18.25F, FontStyle.Bold);
+            station_ICAO_code_label.Location = new Point(45, 0);
+            station_ICAO_code_label.Name = "station_ICAO_code_label";
+            station_ICAO_code_label.Size = new Size(75, 35);
+            station_ICAO_code_label.TabIndex = 10;
+            station_ICAO_code_label.Text = "XXXX";
+            station_ICAO_code_label.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // right_header_data_panel
+            // 
+            right_header_data_panel.Controls.Add(country_code_label);
+            right_header_data_panel.Controls.Add(utc_time_label);
+            right_header_data_panel.Dock = DockStyle.Left;
+            right_header_data_panel.Location = new Point(660, 3);
+            right_header_data_panel.Margin = new Padding(10, 3, 3, 3);
+            right_header_data_panel.Name = "right_header_data_panel";
+            right_header_data_panel.Size = new Size(114, 87);
+            right_header_data_panel.TabIndex = 3;
+            // 
+            // country_code_label
+            // 
+            country_code_label.AutoSize = true;
+            country_code_label.Font = new Font("Segoe UI Semibold", 18.25F, FontStyle.Bold);
+            country_code_label.Location = new Point(3, 43);
+            country_code_label.Name = "country_code_label";
+            country_code_label.Size = new Size(60, 35);
+            country_code_label.TabIndex = 8;
+            country_code_label.Text = "XXX";
+            country_code_label.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // utc_time_label
+            // 
+            utc_time_label.AutoSize = true;
+            utc_time_label.Font = new Font("Segoe UI Semibold", 18.25F, FontStyle.Bold);
+            utc_time_label.Location = new Point(3, 9);
+            utc_time_label.Name = "utc_time_label";
+            utc_time_label.Size = new Size(109, 35);
+            utc_time_label.TabIndex = 9;
+            utc_time_label.Text = "UTC+XX";
+            utc_time_label.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // lat_lon_label
+            // 
+            lat_lon_label.AutoSize = true;
+            lat_lon_label.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 238);
+            lat_lon_label.Location = new Point(587, 60);
+            lat_lon_label.Name = "lat_lon_label";
+            lat_lon_label.Size = new Size(259, 20);
+            lat_lon_label.TabIndex = 6;
+            lat_lon_label.Text = "Lat: 52.585354°          Lon: 20.791443°";
+            // 
+            // refresh_data_label
+            // 
+            refresh_data_label.AutoSize = true;
+            refresh_data_label.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
+            refresh_data_label.Location = new Point(1322, 54);
+            refresh_data_label.Name = "refresh_data_label";
+            refresh_data_label.Size = new Size(105, 34);
+            refresh_data_label.TabIndex = 5;
+            refresh_data_label.Text = "Refresh data:\r\n00.00.0000 00:00";
+            refresh_data_label.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // change_station_btn
+            // 
+            change_station_btn.Location = new Point(12, 12);
+            change_station_btn.Name = "change_station_btn";
+            change_station_btn.Size = new Size(75, 40);
+            change_station_btn.TabIndex = 4;
+            change_station_btn.Text = "Change\r\nstation";
+            change_station_btn.UseVisualStyleBackColor = true;
+            // 
+            // refresh_btn
+            // 
+            refresh_btn.Location = new Point(1345, 17);
+            refresh_btn.Name = "refresh_btn";
+            refresh_btn.Size = new Size(75, 25);
+            refresh_btn.TabIndex = 3;
+            refresh_btn.Text = "Refresh";
+            refresh_btn.UseVisualStyleBackColor = true;
+            // 
+            // data_from_label
+            // 
+            data_from_label.AutoSize = true;
+            data_from_label.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
+            data_from_label.Location = new Point(1211, 54);
+            data_from_label.Name = "data_from_label";
+            data_from_label.Size = new Size(105, 34);
+            data_from_label.TabIndex = 2;
+            data_from_label.Text = "Data from:\r\n00.00.0000 00:00";
+            data_from_label.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // hr_header
             // 
             hr_header.BackColor = Color.FromArgb(5, 42, 117);
             hr_header.Dock = DockStyle.Bottom;
-            hr_header.Location = new Point(0, 83);
+            hr_header.Location = new Point(0, 102);
             hr_header.Name = "hr_header";
             hr_header.Size = new Size(1432, 3);
             hr_header.TabIndex = 0;
@@ -124,7 +315,7 @@
             // 
             generalData.Controls.Add(general_data);
             generalData.Controls.Add(general_description);
-            generalData.Location = new Point(12, 92);
+            generalData.Location = new Point(12, 111);
             generalData.Name = "generalData";
             generalData.Size = new Size(299, 375);
             generalData.TabIndex = 1;
@@ -153,7 +344,7 @@
             // 
             dailyData.Controls.Add(daily_data);
             dailyData.Controls.Add(daily_description);
-            dailyData.Location = new Point(317, 92);
+            dailyData.Location = new Point(317, 111);
             dailyData.Name = "dailyData";
             dailyData.Size = new Size(413, 344);
             dailyData.TabIndex = 2;
@@ -182,7 +373,7 @@
             // 
             windData.Controls.Add(wind__data);
             windData.Controls.Add(wind_description);
-            windData.Location = new Point(1109, 536);
+            windData.Location = new Point(1109, 555);
             windData.Name = "windData";
             windData.Size = new Size(311, 392);
             windData.TabIndex = 3;
@@ -218,7 +409,7 @@
             radiationData.Controls.Add(sun_data);
             radiationData.Controls.Add(uv_index_icon);
             radiationData.Controls.Add(sun_description);
-            radiationData.Location = new Point(736, 92);
+            radiationData.Location = new Point(736, 111);
             radiationData.Name = "radiationData";
             radiationData.Size = new Size(367, 305);
             radiationData.TabIndex = 4;
@@ -322,11 +513,12 @@
             // 
             // uv_index_icon
             // 
-            uv_index_icon.BackgroundImage = Properties.Resources.uv_index_icon;
             uv_index_icon.BackgroundImageLayout = ImageLayout.Zoom;
+            uv_index_icon.Image = Properties.Resources.uv_index_icon;
             uv_index_icon.Location = new Point(19, 164);
             uv_index_icon.Name = "uv_index_icon";
             uv_index_icon.Size = new Size(95, 95);
+            uv_index_icon.SizeMode = PictureBoxSizeMode.Zoom;
             uv_index_icon.TabIndex = 9;
             uv_index_icon.TabStop = false;
             // 
@@ -341,7 +533,7 @@
             // 
             // airqualityData
             // 
-            airqualityData.Location = new Point(1109, 92);
+            airqualityData.Location = new Point(1109, 111);
             airqualityData.Name = "airqualityData";
             airqualityData.Size = new Size(311, 438);
             airqualityData.TabIndex = 5;
@@ -350,7 +542,7 @@
             // 
             // cloudData
             // 
-            cloudData.Location = new Point(12, 634);
+            cloudData.Location = new Point(12, 653);
             cloudData.Name = "cloudData";
             cloudData.Size = new Size(299, 294);
             cloudData.TabIndex = 6;
@@ -360,7 +552,7 @@
             // altitudesData
             // 
             altitudesData.Controls.Add(altitudesDataGridView);
-            altitudesData.Location = new Point(317, 442);
+            altitudesData.Location = new Point(317, 461);
             altitudesData.Name = "altitudesData";
             altitudesData.Size = new Size(786, 486);
             altitudesData.TabIndex = 7;
@@ -375,16 +567,17 @@
             altitudesDataGridView.AllowUserToResizeRows = false;
             altitudesDataGridView.BackgroundColor = Color.White;
             altitudesDataGridView.ColumnHeadersHeight = 27;
+            altitudesDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             altitudesDataGridView.Columns.AddRange(new DataGridViewColumn[] { atlitude, temperature, relative_humidity, wind_speed, wind_direction });
-            dataGridViewCellStyle18.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle18.BackColor = Color.White;
-            dataGridViewCellStyle18.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle18.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle18.Padding = new Padding(10, 0, 0, 0);
-            dataGridViewCellStyle18.SelectionBackColor = Color.White;
-            dataGridViewCellStyle18.SelectionForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle18.WrapMode = DataGridViewTriState.False;
-            altitudesDataGridView.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = Color.White;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle6.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle6.Padding = new Padding(10, 0, 0, 0);
+            dataGridViewCellStyle6.SelectionBackColor = Color.White;
+            dataGridViewCellStyle6.SelectionForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
+            altitudesDataGridView.DefaultCellStyle = dataGridViewCellStyle6;
             altitudesDataGridView.EditMode = DataGridViewEditMode.EditOnEnter;
             altitudesDataGridView.Location = new Point(16, 29);
             altitudesDataGridView.Margin = new Padding(0);
@@ -405,8 +598,8 @@
             // 
             // atlitude
             // 
-            dataGridViewCellStyle13.Padding = new Padding(25, 0, 0, 0);
-            atlitude.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle1.Padding = new Padding(25, 0, 0, 0);
+            atlitude.DefaultCellStyle = dataGridViewCellStyle1;
             atlitude.Frozen = true;
             atlitude.HeaderText = "Atlitude";
             atlitude.Name = "atlitude";
@@ -417,8 +610,8 @@
             // 
             // temperature
             // 
-            dataGridViewCellStyle14.Padding = new Padding(25, 0, 0, 0);
-            temperature.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle2.Padding = new Padding(25, 0, 0, 0);
+            temperature.DefaultCellStyle = dataGridViewCellStyle2;
             temperature.Frozen = true;
             temperature.HeaderText = "Temperature";
             temperature.Name = "temperature";
@@ -429,8 +622,8 @@
             // 
             // relative_humidity
             // 
-            dataGridViewCellStyle15.Padding = new Padding(25, 0, 0, 0);
-            relative_humidity.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle3.Padding = new Padding(25, 0, 0, 0);
+            relative_humidity.DefaultCellStyle = dataGridViewCellStyle3;
             relative_humidity.Frozen = true;
             relative_humidity.HeaderText = "Relative Humidity";
             relative_humidity.Name = "relative_humidity";
@@ -441,8 +634,8 @@
             // 
             // wind_speed
             // 
-            dataGridViewCellStyle16.Padding = new Padding(25, 0, 0, 0);
-            wind_speed.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle4.Padding = new Padding(25, 0, 0, 0);
+            wind_speed.DefaultCellStyle = dataGridViewCellStyle4;
             wind_speed.Frozen = true;
             wind_speed.HeaderText = "Wind speed";
             wind_speed.Name = "wind_speed";
@@ -453,8 +646,8 @@
             // 
             // wind_direction
             // 
-            dataGridViewCellStyle17.Padding = new Padding(25, 0, 0, 0);
-            wind_direction.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle5.Padding = new Padding(25, 0, 0, 0);
+            wind_direction.DefaultCellStyle = dataGridViewCellStyle5;
             wind_direction.Frozen = true;
             wind_direction.HeaderText = "Wind direction";
             wind_direction.Name = "wind_direction";
@@ -467,7 +660,7 @@
             // 
             advancedAtmosphericData.Controls.Add(advancedData_data);
             advancedAtmosphericData.Controls.Add(advancedData_description);
-            advancedAtmosphericData.Location = new Point(12, 473);
+            advancedAtmosphericData.Location = new Point(12, 492);
             advancedAtmosphericData.Name = "advancedAtmosphericData";
             advancedAtmosphericData.Size = new Size(299, 155);
             advancedAtmosphericData.TabIndex = 8;
@@ -492,102 +685,32 @@
             advancedData_description.TabIndex = 0;
             advancedData_description.Text = "CAPE\r\nEvapotranspiration\r\nReference evapotranspiration (ETo)\r\nVapour pressure deficyt (VPD)\r\nIntegrated Water Vapour (IWV)\r\nBoundary layer height\r\nConvective inhibition";
             // 
-            // label1
+            // station_position_panel
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 36F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            label1.Location = new Point(538, -1);
-            label1.Name = "label1";
-            label1.Size = new Size(337, 65);
-            label1.TabIndex = 1;
-            label1.Text = "Station Name";
+            station_position_panel.Controls.Add(station_position_label);
+            station_position_panel.Location = new Point(541, 76);
+            station_position_panel.Name = "station_position_panel";
+            station_position_panel.Size = new Size(337, 20);
+            station_position_panel.TabIndex = 9;
             // 
-            // data_from_label
+            // station_position_label
             // 
-            data_from_label.AutoSize = true;
-            data_from_label.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            data_from_label.Location = new Point(1211, 46);
-            data_from_label.Name = "data_from_label";
-            data_from_label.Size = new Size(105, 34);
-            data_from_label.TabIndex = 2;
-            data_from_label.Text = "Data from:\r\n00.00.0000 00:00";
-            data_from_label.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // refresh_btn
-            // 
-            refresh_btn.Location = new Point(1341, 14);
-            refresh_btn.Name = "refresh_btn";
-            refresh_btn.Size = new Size(75, 23);
-            refresh_btn.TabIndex = 3;
-            refresh_btn.Text = "Refresh";
-            refresh_btn.UseVisualStyleBackColor = true;
-            // 
-            // change_station_btn
-            // 
-            change_station_btn.Location = new Point(12, 12);
-            change_station_btn.Name = "change_station_btn";
-            change_station_btn.Size = new Size(75, 40);
-            change_station_btn.TabIndex = 4;
-            change_station_btn.Text = "Change\r\nstation";
-            change_station_btn.UseVisualStyleBackColor = true;
-            // 
-            // refresh_data_label
-            // 
-            refresh_data_label.AutoSize = true;
-            refresh_data_label.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            refresh_data_label.Location = new Point(1322, 46);
-            refresh_data_label.Name = "refresh_data_label";
-            refresh_data_label.Size = new Size(105, 34);
-            refresh_data_label.TabIndex = 5;
-            refresh_data_label.Text = "Refresh data:\r\n00.00.0000 00:00";
-            refresh_data_label.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // lat_lon_label
-            // 
-            lat_lon_label.AutoSize = true;
-            lat_lon_label.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            lat_lon_label.Location = new Point(587, 60);
-            lat_lon_label.Name = "lat_lon_label";
-            lat_lon_label.Size = new Size(259, 20);
-            lat_lon_label.TabIndex = 6;
-            lat_lon_label.Text = "Lat: 52.585354°          Lon: 20.791443°";
-            // 
-            // station_feature_code_label
-            // 
-            station_feature_code_label.AutoSize = true;
-            station_feature_code_label.Font = new Font("Segoe UI Semibold", 18.25F, FontStyle.Bold);
-            station_feature_code_label.Location = new Point(430, 6);
-            station_feature_code_label.Name = "station_feature_code_label";
-            station_feature_code_label.Size = new Size(90, 35);
-            station_feature_code_label.TabIndex = 7;
-            station_feature_code_label.Text = "XXXXX";
-            // 
-            // country_code_label
-            // 
-            country_code_label.AutoSize = true;
-            country_code_label.Font = new Font("Segoe UI Semibold", 18.25F, FontStyle.Bold);
-            country_code_label.Location = new Point(430, 43);
-            country_code_label.Name = "country_code_label";
-            country_code_label.Size = new Size(60, 35);
-            country_code_label.TabIndex = 8;
-            country_code_label.Text = "XXX";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI Semibold", 18.25F, FontStyle.Bold);
-            label2.Location = new Point(901, 4);
-            label2.Name = "label2";
-            label2.Size = new Size(109, 35);
-            label2.TabIndex = 9;
-            label2.Text = "UTC+XX";
+            station_position_label.Dock = DockStyle.Fill;
+            station_position_label.Font = new Font("Segoe UI Semibold", 10.75F, FontStyle.Bold);
+            station_position_label.Location = new Point(0, 0);
+            station_position_label.Name = "station_position_label";
+            station_position_label.Size = new Size(337, 20);
+            station_position_label.TabIndex = 0;
+            station_position_label.Text = "Lat: 52.16575°          Lon: 20.96712°";
+            station_position_label.TextAlign = ContentAlignment.BottomCenter;
             // 
             // WeatherRider
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1432, 939);
+            ClientSize = new Size(1432, 959);
+            Controls.Add(station_position_panel);
             Controls.Add(cloudData);
             Controls.Add(advancedAtmosphericData);
             Controls.Add(altitudesData);
@@ -603,9 +726,21 @@
             Name = "WeatherRider";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Weather Rider";
+            TransparencyKey = Color.FromArgb(240, 224, 224);
             WindowState = FormWindowState.Minimized;
+            FormClosing += ClosingApplication;
             header.ResumeLayout(false);
             header.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)noInternetIcon).EndInit();
+            station_data_tableLayoutPanel.ResumeLayout(false);
+            station_data_tableLayoutPanel.PerformLayout();
+            left_header_data_panel.ResumeLayout(false);
+            station_feature_code_panel.ResumeLayout(false);
+            station_feature_code_panel.PerformLayout();
+            station_ICAO_code_panel.ResumeLayout(false);
+            station_ICAO_code_panel.PerformLayout();
+            right_header_data_panel.ResumeLayout(false);
+            right_header_data_panel.PerformLayout();
             generalData.ResumeLayout(false);
             generalData.PerformLayout();
             dailyData.ResumeLayout(false);
@@ -622,6 +757,7 @@
             ((System.ComponentModel.ISupportInitialize)altitudesDataGridView).EndInit();
             advancedAtmosphericData.ResumeLayout(false);
             advancedAtmosphericData.PerformLayout();
+            station_position_panel.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -662,7 +798,7 @@
         private Label uv_index_clear_sky_label2;
         private PictureBox uv_index_value_icon;
         private PictureBox uv_index_clear_skyvalue_icon;
-        private Label label1;
+        private Label station_name_label;
         private Label data_from_label;
         private Button change_station_btn;
         private Button refresh_btn;
@@ -670,6 +806,15 @@
         private Label lat_lon_label;
         private Label station_feature_code_label;
         private Label country_code_label;
-        private Label label2;
+        private Label utc_time_label;
+        private Label station_ICAO_code_label;
+        private TableLayoutPanel station_data_tableLayoutPanel;
+        private Panel left_header_data_panel;
+        private Panel right_header_data_panel;
+        private Panel station_position_panel;
+        private Label station_position_label;
+        private Panel station_feature_code_panel;
+        private Panel station_ICAO_code_panel;
+        private PictureBox noInternetIcon;
     }
 }

@@ -51,7 +51,7 @@
             // 
             animatedLogo.BackColor = Color.Transparent;
             animatedLogo.Image = Properties.Resources.snowflake_animated;
-            animatedLogo.Location = new Point(100, 88);
+            animatedLogo.Location = new Point(100, 95);
             animatedLogo.Name = "animatedLogo";
             animatedLogo.Size = new Size(150, 150);
             animatedLogo.TabIndex = 3;
@@ -61,7 +61,7 @@
             // 
             title.AutoSize = true;
             title.Font = new Font("Segoe UI", 27.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            title.Location = new Point(45, 17);
+            title.Location = new Point(45, 19);
             title.Name = "title";
             title.Size = new Size(262, 50);
             title.TabIndex = 6;
@@ -85,7 +85,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            BackgroundImage = Properties.Resources.loadingFormBackground;
+            BackgroundImage = Properties.Resources.loadingFormBackground1;
             ClientSize = new Size(350, 475);
             ControlBox = false;
             Controls.Add(title);

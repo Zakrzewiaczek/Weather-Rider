@@ -85,11 +85,11 @@
             // icon
             // 
             icon.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            icon.BackgroundImage = Properties.Resources.InputMessageBoxIcon;
-            icon.BackgroundImageLayout = ImageLayout.Zoom;
-            icon.Location = new Point(21, 33);
+            icon.BackgroundImage = Properties.Resources.InputMessageBoxIcon1;
+            icon.BackgroundImageLayout = ImageLayout.Stretch;
+            icon.Location = new Point(15, 33);
             icon.Name = "icon";
-            icon.Size = new Size(32, 32);
+            icon.Size = new Size(35, 35);
             icon.TabIndex = 2;
             icon.TabStop = false;
             // 

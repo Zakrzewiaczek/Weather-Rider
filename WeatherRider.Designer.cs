@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WeatherRider));
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle24 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle19 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle20 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle21 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle22 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle23 = new DataGridViewCellStyle();
             header = new Panel();
             noInternetIcon = new PictureBox();
             station_data_tableLayoutPanel = new TableLayoutPanel();
@@ -75,6 +75,7 @@
             uv_index_icon = new PictureBox();
             sun_description = new Label();
             airqualityData = new GroupBox();
+            tableLayoutPanel1 = new TableLayoutPanel();
             cloudData = new GroupBox();
             altitudesData = new GroupBox();
             altitudesDataGridView = new DataGridView();
@@ -103,6 +104,7 @@
             ((System.ComponentModel.ISupportInitialize)uv_index_value_icon).BeginInit();
             UVPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)uv_index_icon).BeginInit();
+            airqualityData.SuspendLayout();
             altitudesData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)altitudesDataGridView).BeginInit();
             advancedAtmosphericData.SuspendLayout();
@@ -533,12 +535,42 @@
             // 
             // airqualityData
             // 
+            airqualityData.Controls.Add(tableLayoutPanel1);
             airqualityData.Location = new Point(1109, 111);
             airqualityData.Name = "airqualityData";
             airqualityData.Size = new Size(311, 438);
             airqualityData.TabIndex = 5;
             airqualityData.TabStop = false;
             airqualityData.Text = "AQI";
+            // 
+            // tableLayoutPanel1
+            // 
+            tableLayoutPanel1.ColumnCount = 1;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.Location = new Point(126, 117);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 19;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
+            tableLayoutPanel1.Size = new Size(48, 426);
+            tableLayoutPanel1.TabIndex = 1;
             // 
             // cloudData
             // 
@@ -569,15 +601,15 @@
             altitudesDataGridView.ColumnHeadersHeight = 27;
             altitudesDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             altitudesDataGridView.Columns.AddRange(new DataGridViewColumn[] { atlitude, temperature, relative_humidity, wind_speed, wind_direction });
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = Color.White;
-            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle6.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle6.Padding = new Padding(10, 0, 0, 0);
-            dataGridViewCellStyle6.SelectionBackColor = Color.White;
-            dataGridViewCellStyle6.SelectionForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
-            altitudesDataGridView.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle24.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle24.BackColor = Color.White;
+            dataGridViewCellStyle24.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle24.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle24.Padding = new Padding(10, 0, 0, 0);
+            dataGridViewCellStyle24.SelectionBackColor = Color.White;
+            dataGridViewCellStyle24.SelectionForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle24.WrapMode = DataGridViewTriState.False;
+            altitudesDataGridView.DefaultCellStyle = dataGridViewCellStyle24;
             altitudesDataGridView.EditMode = DataGridViewEditMode.EditOnEnter;
             altitudesDataGridView.Location = new Point(16, 29);
             altitudesDataGridView.Margin = new Padding(0);
@@ -598,8 +630,8 @@
             // 
             // atlitude
             // 
-            dataGridViewCellStyle1.Padding = new Padding(25, 0, 0, 0);
-            atlitude.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle19.Padding = new Padding(25, 0, 0, 0);
+            atlitude.DefaultCellStyle = dataGridViewCellStyle19;
             atlitude.Frozen = true;
             atlitude.HeaderText = "Atlitude";
             atlitude.Name = "atlitude";
@@ -610,8 +642,8 @@
             // 
             // temperature
             // 
-            dataGridViewCellStyle2.Padding = new Padding(25, 0, 0, 0);
-            temperature.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle20.Padding = new Padding(25, 0, 0, 0);
+            temperature.DefaultCellStyle = dataGridViewCellStyle20;
             temperature.Frozen = true;
             temperature.HeaderText = "Temperature";
             temperature.Name = "temperature";
@@ -622,8 +654,8 @@
             // 
             // relative_humidity
             // 
-            dataGridViewCellStyle3.Padding = new Padding(25, 0, 0, 0);
-            relative_humidity.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle21.Padding = new Padding(25, 0, 0, 0);
+            relative_humidity.DefaultCellStyle = dataGridViewCellStyle21;
             relative_humidity.Frozen = true;
             relative_humidity.HeaderText = "Relative Humidity";
             relative_humidity.Name = "relative_humidity";
@@ -634,8 +666,8 @@
             // 
             // wind_speed
             // 
-            dataGridViewCellStyle4.Padding = new Padding(25, 0, 0, 0);
-            wind_speed.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle22.Padding = new Padding(25, 0, 0, 0);
+            wind_speed.DefaultCellStyle = dataGridViewCellStyle22;
             wind_speed.Frozen = true;
             wind_speed.HeaderText = "Wind speed";
             wind_speed.Name = "wind_speed";
@@ -646,8 +678,8 @@
             // 
             // wind_direction
             // 
-            dataGridViewCellStyle5.Padding = new Padding(25, 0, 0, 0);
-            wind_direction.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle23.Padding = new Padding(25, 0, 0, 0);
+            wind_direction.DefaultCellStyle = dataGridViewCellStyle23;
             wind_direction.Frozen = true;
             wind_direction.HeaderText = "Wind direction";
             wind_direction.Name = "wind_direction";
@@ -753,6 +785,7 @@
             ((System.ComponentModel.ISupportInitialize)uv_index_value_icon).EndInit();
             UVPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)uv_index_icon).EndInit();
+            airqualityData.ResumeLayout(false);
             altitudesData.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)altitudesDataGridView).EndInit();
             advancedAtmosphericData.ResumeLayout(false);
@@ -785,11 +818,6 @@
         private Panel hr_header;
         private DataGridView altitudesDataGridView;
         private PictureBox uv_index_icon;
-        private DataGridViewTextBoxColumn atlitude;
-        private DataGridViewTextBoxColumn temperature;
-        private DataGridViewTextBoxColumn relative_humidity;
-        private DataGridViewTextBoxColumn wind_speed;
-        private DataGridViewTextBoxColumn wind_direction;
         private LiveChartsCore.SkiaSharpView.WinForms.PieChart uv_index_gauge;
         private Panel UVPanel;
         private LiveChartsCore.SkiaSharpView.WinForms.PieChart uv_index_clear_sky_gauge;
@@ -816,5 +844,11 @@
         private Panel station_feature_code_panel;
         private Panel station_ICAO_code_panel;
         private PictureBox noInternetIcon;
+        private DataGridViewTextBoxColumn atlitude;
+        private DataGridViewTextBoxColumn temperature;
+        private DataGridViewTextBoxColumn relative_humidity;
+        private DataGridViewTextBoxColumn wind_speed;
+        private DataGridViewTextBoxColumn wind_direction;
+        private TableLayoutPanel tableLayoutPanel1;
     }
 }

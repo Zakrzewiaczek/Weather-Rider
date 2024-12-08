@@ -23,8 +23,6 @@ namespace Weather_Rider
             InitializeComponent();
             Debug.WriteLine("Components initialized");
 
-            pictureBox2.Parent = pictureBox1;
-
             Shown += (s, e) => Hide(); // Hide the form until the data is loaded
             LoadApp(); // Load the app (in background)
         }

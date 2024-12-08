@@ -118,14 +118,20 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="loadingFormBackground1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\~ Assets (temporary) ~\loadingFormBackground.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="InputMessageBoxIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\~ Assets (temporary) ~\InputMessageBoxIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="loadingFormBackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\~ Assets (temporary) ~\loadingFormBackground.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="uv_index" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\uv_index.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="InputMessageBoxIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\~ Assets (temporary) ~\InputMessageBoxIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="noWifiIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\~ Assets (temporary) ~\noWifiIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="snowflake_animated" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\~ Assets (temporary) ~\snowflake_animated.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -136,7 +142,7 @@
   <data name="uv_index_clear_sky" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\uv_index_clear_sky.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="noWifiIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\~ Assets (temporary) ~\noWifiIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="InputMessageBoxIcon1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\~ Assets (temporary) ~\InputMessageBoxIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

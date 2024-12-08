@@ -73,9 +73,29 @@ namespace Weather_Rider.Properties {
         /// <summary>
         ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap InputMessageBoxIcon1 {
+            get {
+                object obj = ResourceManager.GetObject("InputMessageBoxIcon1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap loadingFormBackground {
             get {
                 object obj = ResourceManager.GetObject("loadingFormBackground", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap loadingFormBackground1 {
+            get {
+                object obj = ResourceManager.GetObject("loadingFormBackground1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

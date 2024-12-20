@@ -29,13 +29,18 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WeatherRider));
-            DataGridViewCellStyle dataGridViewCellStyle24 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle19 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle20 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle21 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle22 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle23 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             header = new Panel();
+            controlBoxPanel = new Panel();
+            pictureBox3 = new PictureBox();
+            pictureBox1 = new PictureBox();
+            exit_btn = new PictureBox();
+            pictureBox2 = new PictureBox();
             noInternetIcon = new PictureBox();
             station_data_tableLayoutPanel = new TableLayoutPanel();
             station_name_label = new Label();
@@ -60,6 +65,7 @@
             daily_data = new Label();
             daily_description = new Label();
             windData = new GroupBox();
+            windDataPictureBox = new PictureBox();
             wind__data = new Label();
             wind_description = new Label();
             radiationData = new GroupBox();
@@ -72,10 +78,9 @@
             uv_index_clear_sky_gauge = new LiveChartsCore.SkiaSharpView.WinForms.PieChart();
             uv_index_gauge = new LiveChartsCore.SkiaSharpView.WinForms.PieChart();
             sun_data = new Label();
-            uv_index_icon = new PictureBox();
             sun_description = new Label();
             airqualityData = new GroupBox();
-            tableLayoutPanel1 = new TableLayoutPanel();
+            beaufort_wind_data_pictures = new PictureBox();
             cloudData = new GroupBox();
             altitudesData = new GroupBox();
             altitudesDataGridView = new DataGridView();
@@ -84,12 +89,18 @@
             relative_humidity = new DataGridViewTextBoxColumn();
             wind_speed = new DataGridViewTextBoxColumn();
             wind_direction = new DataGridViewTextBoxColumn();
+            beaufort = new DataGridViewTextBoxColumn();
             advancedAtmosphericData = new GroupBox();
             advancedData_data = new Label();
             advancedData_description = new Label();
             station_position_panel = new Panel();
             station_position_label = new Label();
             header.SuspendLayout();
+            controlBoxPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)exit_btn).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)noInternetIcon).BeginInit();
             station_data_tableLayoutPanel.SuspendLayout();
             left_header_data_panel.SuspendLayout();
@@ -99,12 +110,12 @@
             generalData.SuspendLayout();
             dailyData.SuspendLayout();
             windData.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)windDataPictureBox).BeginInit();
             radiationData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)uv_index_clear_skyvalue_icon).BeginInit();
             ((System.ComponentModel.ISupportInitialize)uv_index_value_icon).BeginInit();
             UVPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)uv_index_icon).BeginInit();
-            airqualityData.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)beaufort_wind_data_pictures).BeginInit();
             altitudesData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)altitudesDataGridView).BeginInit();
             advancedAtmosphericData.SuspendLayout();
@@ -113,6 +124,8 @@
             // 
             // header
             // 
+            header.Controls.Add(controlBoxPanel);
+            header.Controls.Add(pictureBox2);
             header.Controls.Add(noInternetIcon);
             header.Controls.Add(station_data_tableLayoutPanel);
             header.Controls.Add(lat_lon_label);
@@ -127,11 +140,61 @@
             header.Size = new Size(1432, 105);
             header.TabIndex = 0;
             // 
+            // controlBoxPanel
+            // 
+            controlBoxPanel.Controls.Add(pictureBox3);
+            controlBoxPanel.Controls.Add(pictureBox1);
+            controlBoxPanel.Controls.Add(exit_btn);
+            controlBoxPanel.Location = new Point(0, 0);
+            controlBoxPanel.Name = "controlBoxPanel";
+            controlBoxPanel.Size = new Size(124, 28);
+            controlBoxPanel.TabIndex = 14;
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.BackgroundImage = (Image)resources.GetObject("pictureBox3.BackgroundImage");
+            pictureBox3.BackgroundImageLayout = ImageLayout.Zoom;
+            pictureBox3.Location = new Point(70, 2);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(25, 25);
+            pictureBox3.TabIndex = 2;
+            pictureBox3.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackgroundImage = (Image)resources.GetObject("pictureBox1.BackgroundImage");
+            pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
+            pictureBox1.Location = new Point(39, 2);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(25, 25);
+            pictureBox1.TabIndex = 1;
+            pictureBox1.TabStop = false;
+            // 
+            // exit_btn
+            // 
+            exit_btn.BackgroundImage = (Image)resources.GetObject("exit_btn.BackgroundImage");
+            exit_btn.BackgroundImageLayout = ImageLayout.Zoom;
+            exit_btn.Location = new Point(8, 2);
+            exit_btn.Name = "exit_btn";
+            exit_btn.Size = new Size(25, 25);
+            exit_btn.TabIndex = 0;
+            exit_btn.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = Properties.Resources.snowflake_animated;
+            pictureBox2.Location = new Point(12, 33);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(65, 65);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 13;
+            pictureBox2.TabStop = false;
+            // 
             // noInternetIcon
             // 
             noInternetIcon.BackgroundImage = Properties.Resources.noWifiIcon;
             noInternetIcon.BackgroundImageLayout = ImageLayout.Zoom;
-            noInternetIcon.Location = new Point(1306, 17);
+            noInternetIcon.Location = new Point(1303, 17);
             noInternetIcon.Name = "noInternetIcon";
             noInternetIcon.Size = new Size(25, 25);
             noInternetIcon.TabIndex = 12;
@@ -268,7 +331,7 @@
             // 
             refresh_data_label.AutoSize = true;
             refresh_data_label.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            refresh_data_label.Location = new Point(1322, 54);
+            refresh_data_label.Location = new Point(1320, 57);
             refresh_data_label.Name = "refresh_data_label";
             refresh_data_label.Size = new Size(105, 34);
             refresh_data_label.TabIndex = 5;
@@ -277,7 +340,7 @@
             // 
             // change_station_btn
             // 
-            change_station_btn.Location = new Point(12, 12);
+            change_station_btn.Location = new Point(1220, 11);
             change_station_btn.Name = "change_station_btn";
             change_station_btn.Size = new Size(75, 40);
             change_station_btn.TabIndex = 4;
@@ -286,7 +349,7 @@
             // 
             // refresh_btn
             // 
-            refresh_btn.Location = new Point(1345, 17);
+            refresh_btn.Location = new Point(1335, 17);
             refresh_btn.Name = "refresh_btn";
             refresh_btn.Size = new Size(75, 25);
             refresh_btn.TabIndex = 3;
@@ -297,7 +360,7 @@
             // 
             data_from_label.AutoSize = true;
             data_from_label.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            data_from_label.Location = new Point(1211, 54);
+            data_from_label.Location = new Point(1205, 57);
             data_from_label.Name = "data_from_label";
             data_from_label.Size = new Size(105, 34);
             data_from_label.TabIndex = 2;
@@ -348,7 +411,7 @@
             dailyData.Controls.Add(daily_description);
             dailyData.Location = new Point(317, 111);
             dailyData.Name = "dailyData";
-            dailyData.Size = new Size(413, 344);
+            dailyData.Size = new Size(413, 305);
             dailyData.TabIndex = 2;
             dailyData.TabStop = false;
             dailyData.Text = "Daily";
@@ -373,6 +436,7 @@
             // 
             // windData
             // 
+            windData.Controls.Add(windDataPictureBox);
             windData.Controls.Add(wind__data);
             windData.Controls.Add(wind_description);
             windData.Location = new Point(1109, 555);
@@ -381,6 +445,16 @@
             windData.TabIndex = 3;
             windData.TabStop = false;
             windData.Text = "Wind";
+            // 
+            // windDataPictureBox
+            // 
+            windDataPictureBox.BackColor = Color.White;
+            windDataPictureBox.BackgroundImageLayout = ImageLayout.Zoom;
+            windDataPictureBox.Location = new Point(80, 40);
+            windDataPictureBox.Name = "windDataPictureBox";
+            windDataPictureBox.Size = new Size(155, 155);
+            windDataPictureBox.TabIndex = 4;
+            windDataPictureBox.TabStop = false;
             // 
             // wind__data
             // 
@@ -409,7 +483,6 @@
             radiationData.Controls.Add(uv_index_label);
             radiationData.Controls.Add(UVPanel);
             radiationData.Controls.Add(sun_data);
-            radiationData.Controls.Add(uv_index_icon);
             radiationData.Controls.Add(sun_description);
             radiationData.Location = new Point(736, 111);
             radiationData.Name = "radiationData";
@@ -422,7 +495,7 @@
             // 
             uv_index_clear_skyvalue_icon.BackgroundImage = Properties.Resources.uv_index_clear_sky;
             uv_index_clear_skyvalue_icon.BackgroundImageLayout = ImageLayout.Zoom;
-            uv_index_clear_skyvalue_icon.Location = new Point(283, 132);
+            uv_index_clear_skyvalue_icon.Location = new Point(244, 132);
             uv_index_clear_skyvalue_icon.Name = "uv_index_clear_skyvalue_icon";
             uv_index_clear_skyvalue_icon.Size = new Size(40, 40);
             uv_index_clear_skyvalue_icon.TabIndex = 13;
@@ -432,7 +505,7 @@
             // 
             uv_index_value_icon.BackgroundImage = Properties.Resources.uv_index;
             uv_index_value_icon.BackgroundImageLayout = ImageLayout.Zoom;
-            uv_index_value_icon.Location = new Point(165, 132);
+            uv_index_value_icon.Location = new Point(86, 132);
             uv_index_value_icon.Name = "uv_index_value_icon";
             uv_index_value_icon.Size = new Size(40, 40);
             uv_index_value_icon.TabIndex = 9;
@@ -442,7 +515,7 @@
             // 
             uv_index_clear_sky_label1.AutoSize = true;
             uv_index_clear_sky_label1.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            uv_index_clear_sky_label1.Location = new Point(256, 257);
+            uv_index_clear_sky_label1.Location = new Point(217, 257);
             uv_index_clear_sky_label1.Name = "uv_index_clear_sky_label1";
             uv_index_clear_sky_label1.Size = new Size(90, 25);
             uv_index_clear_sky_label1.TabIndex = 11;
@@ -453,7 +526,7 @@
             // 
             uv_index_clear_sky_label2.AutoSize = true;
             uv_index_clear_sky_label2.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            uv_index_clear_sky_label2.Location = new Point(270, 277);
+            uv_index_clear_sky_label2.Location = new Point(231, 277);
             uv_index_clear_sky_label2.Name = "uv_index_clear_sky_label2";
             uv_index_clear_sky_label2.Size = new Size(63, 19);
             uv_index_clear_sky_label2.TabIndex = 12;
@@ -464,7 +537,7 @@
             // 
             uv_index_label.AutoSize = true;
             uv_index_label.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            uv_index_label.Location = new Point(141, 257);
+            uv_index_label.Location = new Point(62, 257);
             uv_index_label.Name = "uv_index_label";
             uv_index_label.Size = new Size(90, 25);
             uv_index_label.TabIndex = 10;
@@ -475,16 +548,16 @@
             // 
             UVPanel.Controls.Add(uv_index_clear_sky_gauge);
             UVPanel.Controls.Add(uv_index_gauge);
-            UVPanel.Location = new Point(133, 167);
+            UVPanel.Location = new Point(35, 167);
             UVPanel.Name = "UVPanel";
-            UVPanel.Size = new Size(221, 88);
+            UVPanel.Size = new Size(301, 88);
             UVPanel.TabIndex = 9;
             // 
             // uv_index_clear_sky_gauge
             // 
             uv_index_clear_sky_gauge.InitialRotation = 0D;
             uv_index_clear_sky_gauge.IsClockwise = true;
-            uv_index_clear_sky_gauge.Location = new Point(115, 0);
+            uv_index_clear_sky_gauge.Location = new Point(175, 1);
             uv_index_clear_sky_gauge.MaxAngle = 360D;
             uv_index_clear_sky_gauge.MaxValue = null;
             uv_index_clear_sky_gauge.MinValue = 0D;
@@ -496,7 +569,7 @@
             // 
             uv_index_gauge.InitialRotation = 0D;
             uv_index_gauge.IsClockwise = true;
-            uv_index_gauge.Location = new Point(0, 0);
+            uv_index_gauge.Location = new Point(17, 1);
             uv_index_gauge.MaxAngle = 360D;
             uv_index_gauge.MaxValue = null;
             uv_index_gauge.MinValue = 0D;
@@ -507,27 +580,16 @@
             // sun_data
             // 
             sun_data.AutoSize = true;
-            sun_data.Location = new Point(260, 24);
+            sun_data.Location = new Point(285, 24);
             sun_data.Name = "sun_data";
             sun_data.Size = new Size(418, 90);
             sun_data.TabIndex = 1;
             sun_data.Text = resources.GetString("sun_data.Text");
             // 
-            // uv_index_icon
-            // 
-            uv_index_icon.BackgroundImageLayout = ImageLayout.Zoom;
-            uv_index_icon.Image = Properties.Resources.uv_index_icon;
-            uv_index_icon.Location = new Point(19, 164);
-            uv_index_icon.Name = "uv_index_icon";
-            uv_index_icon.Size = new Size(95, 95);
-            uv_index_icon.SizeMode = PictureBoxSizeMode.Zoom;
-            uv_index_icon.TabIndex = 9;
-            uv_index_icon.TabStop = false;
-            // 
             // sun_description
             // 
             sun_description.AutoSize = true;
-            sun_description.Location = new Point(10, 24);
+            sun_description.Location = new Point(14, 24);
             sun_description.Name = "sun_description";
             sun_description.Size = new Size(217, 90);
             sun_description.TabIndex = 0;
@@ -535,7 +597,6 @@
             // 
             // airqualityData
             // 
-            airqualityData.Controls.Add(tableLayoutPanel1);
             airqualityData.Location = new Point(1109, 111);
             airqualityData.Name = "airqualityData";
             airqualityData.Size = new Size(311, 438);
@@ -543,34 +604,15 @@
             airqualityData.TabStop = false;
             airqualityData.Text = "AQI";
             // 
-            // tableLayoutPanel1
+            // beaufort_wind_data_pictures
             // 
-            tableLayoutPanel1.ColumnCount = 1;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Location = new Point(126, 117);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 19;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 22.4210529F));
-            tableLayoutPanel1.Size = new Size(48, 426);
-            tableLayoutPanel1.TabIndex = 1;
+            beaufort_wind_data_pictures.BackgroundImage = Properties.Resources.noWifiIcon;
+            beaufort_wind_data_pictures.BackgroundImageLayout = ImageLayout.Zoom;
+            beaufort_wind_data_pictures.Location = new Point(724, 57);
+            beaufort_wind_data_pictures.Name = "beaufort_wind_data_pictures";
+            beaufort_wind_data_pictures.Size = new Size(51, 453);
+            beaufort_wind_data_pictures.TabIndex = 2;
+            beaufort_wind_data_pictures.TabStop = false;
             // 
             // cloudData
             // 
@@ -583,10 +625,11 @@
             // 
             // altitudesData
             // 
+            altitudesData.Controls.Add(beaufort_wind_data_pictures);
             altitudesData.Controls.Add(altitudesDataGridView);
-            altitudesData.Location = new Point(317, 461);
+            altitudesData.Location = new Point(317, 422);
             altitudesData.Name = "altitudesData";
-            altitudesData.Size = new Size(786, 486);
+            altitudesData.Size = new Size(786, 525);
             altitudesData.TabIndex = 7;
             altitudesData.TabStop = false;
             altitudesData.Text = "Data at different heights";
@@ -600,18 +643,18 @@
             altitudesDataGridView.BackgroundColor = Color.White;
             altitudesDataGridView.ColumnHeadersHeight = 27;
             altitudesDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            altitudesDataGridView.Columns.AddRange(new DataGridViewColumn[] { atlitude, temperature, relative_humidity, wind_speed, wind_direction });
-            dataGridViewCellStyle24.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle24.BackColor = Color.White;
-            dataGridViewCellStyle24.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle24.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle24.Padding = new Padding(10, 0, 0, 0);
-            dataGridViewCellStyle24.SelectionBackColor = Color.White;
-            dataGridViewCellStyle24.SelectionForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle24.WrapMode = DataGridViewTriState.False;
-            altitudesDataGridView.DefaultCellStyle = dataGridViewCellStyle24;
+            altitudesDataGridView.Columns.AddRange(new DataGridViewColumn[] { atlitude, temperature, relative_humidity, wind_speed, wind_direction, beaufort });
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = Color.White;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle6.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle6.Padding = new Padding(10, 0, 0, 0);
+            dataGridViewCellStyle6.SelectionBackColor = Color.White;
+            dataGridViewCellStyle6.SelectionForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
+            altitudesDataGridView.DefaultCellStyle = dataGridViewCellStyle6;
             altitudesDataGridView.EditMode = DataGridViewEditMode.EditOnEnter;
-            altitudesDataGridView.Location = new Point(16, 29);
+            altitudesDataGridView.Location = new Point(13, 26);
             altitudesDataGridView.Margin = new Padding(0);
             altitudesDataGridView.MultiSelect = false;
             altitudesDataGridView.Name = "altitudesDataGridView";
@@ -624,14 +667,14 @@
             altitudesDataGridView.ShowCellToolTips = false;
             altitudesDataGridView.ShowEditingIcon = false;
             altitudesDataGridView.ShowRowErrors = false;
-            altitudesDataGridView.Size = new Size(713, 455);
+            altitudesDataGridView.Size = new Size(767, 493);
             altitudesDataGridView.TabIndex = 0;
             altitudesDataGridView.CellPainting += OnCellPainting;
             // 
             // atlitude
             // 
-            dataGridViewCellStyle19.Padding = new Padding(25, 0, 0, 0);
-            atlitude.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle1.Padding = new Padding(25, 0, 0, 0);
+            atlitude.DefaultCellStyle = dataGridViewCellStyle1;
             atlitude.Frozen = true;
             atlitude.HeaderText = "Atlitude";
             atlitude.Name = "atlitude";
@@ -642,8 +685,8 @@
             // 
             // temperature
             // 
-            dataGridViewCellStyle20.Padding = new Padding(25, 0, 0, 0);
-            temperature.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle2.Padding = new Padding(25, 0, 0, 0);
+            temperature.DefaultCellStyle = dataGridViewCellStyle2;
             temperature.Frozen = true;
             temperature.HeaderText = "Temperature";
             temperature.Name = "temperature";
@@ -654,8 +697,8 @@
             // 
             // relative_humidity
             // 
-            dataGridViewCellStyle21.Padding = new Padding(25, 0, 0, 0);
-            relative_humidity.DefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle3.Padding = new Padding(25, 0, 0, 0);
+            relative_humidity.DefaultCellStyle = dataGridViewCellStyle3;
             relative_humidity.Frozen = true;
             relative_humidity.HeaderText = "Relative Humidity";
             relative_humidity.Name = "relative_humidity";
@@ -666,8 +709,8 @@
             // 
             // wind_speed
             // 
-            dataGridViewCellStyle22.Padding = new Padding(25, 0, 0, 0);
-            wind_speed.DefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle4.Padding = new Padding(25, 0, 0, 0);
+            wind_speed.DefaultCellStyle = dataGridViewCellStyle4;
             wind_speed.Frozen = true;
             wind_speed.HeaderText = "Wind speed";
             wind_speed.Name = "wind_speed";
@@ -678,8 +721,8 @@
             // 
             // wind_direction
             // 
-            dataGridViewCellStyle23.Padding = new Padding(25, 0, 0, 0);
-            wind_direction.DefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle5.Padding = new Padding(25, 0, 0, 0);
+            wind_direction.DefaultCellStyle = dataGridViewCellStyle5;
             wind_direction.Frozen = true;
             wind_direction.HeaderText = "Wind direction";
             wind_direction.Name = "wind_direction";
@@ -687,6 +730,14 @@
             wind_direction.Resizable = DataGridViewTriState.False;
             wind_direction.SortMode = DataGridViewColumnSortMode.NotSortable;
             wind_direction.Width = 130;
+            // 
+            // beaufort
+            // 
+            beaufort.Frozen = true;
+            beaufort.HeaderText = "";
+            beaufort.Name = "beaufort";
+            beaufort.ReadOnly = true;
+            beaufort.Width = 50;
             // 
             // advancedAtmosphericData
             // 
@@ -752,7 +803,7 @@
             Controls.Add(dailyData);
             Controls.Add(generalData);
             Controls.Add(header);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
+            FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "WeatherRider";
@@ -763,6 +814,11 @@
             FormClosing += ClosingApplication;
             header.ResumeLayout(false);
             header.PerformLayout();
+            controlBoxPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)exit_btn).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)noInternetIcon).EndInit();
             station_data_tableLayoutPanel.ResumeLayout(false);
             station_data_tableLayoutPanel.PerformLayout();
@@ -779,13 +835,13 @@
             dailyData.PerformLayout();
             windData.ResumeLayout(false);
             windData.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)windDataPictureBox).EndInit();
             radiationData.ResumeLayout(false);
             radiationData.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)uv_index_clear_skyvalue_icon).EndInit();
             ((System.ComponentModel.ISupportInitialize)uv_index_value_icon).EndInit();
             UVPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)uv_index_icon).EndInit();
-            airqualityData.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)beaufort_wind_data_pictures).EndInit();
             altitudesData.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)altitudesDataGridView).EndInit();
             advancedAtmosphericData.ResumeLayout(false);
@@ -817,7 +873,6 @@
         private Label sun_description;
         private Panel hr_header;
         private DataGridView altitudesDataGridView;
-        private PictureBox uv_index_icon;
         private LiveChartsCore.SkiaSharpView.WinForms.PieChart uv_index_gauge;
         private Panel UVPanel;
         private LiveChartsCore.SkiaSharpView.WinForms.PieChart uv_index_clear_sky_gauge;
@@ -844,11 +899,18 @@
         private Panel station_feature_code_panel;
         private Panel station_ICAO_code_panel;
         private PictureBox noInternetIcon;
+        private PictureBox beaufort_wind_data_pictures;
+        private PictureBox pictureBox2;
         private DataGridViewTextBoxColumn atlitude;
         private DataGridViewTextBoxColumn temperature;
         private DataGridViewTextBoxColumn relative_humidity;
         private DataGridViewTextBoxColumn wind_speed;
         private DataGridViewTextBoxColumn wind_direction;
-        private TableLayoutPanel tableLayoutPanel1;
+        private DataGridViewTextBoxColumn beaufort;
+        private PictureBox windDataPictureBox;
+        private Panel controlBoxPanel;
+        private PictureBox exit_btn;
+        private PictureBox pictureBox3;
+        private PictureBox pictureBox1;
     }
 }

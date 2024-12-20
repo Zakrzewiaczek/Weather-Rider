@@ -121,14 +121,17 @@
   <data name="loadingFormBackground1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\~ Assets (temporary) ~\loadingFormBackground.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="InputMessageBoxIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="InputMessageBoxIcon1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\~ Assets (temporary) ~\InputMessageBoxIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="loadingFormBackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\~ Assets (temporary) ~\loadingFormBackground.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="uv_index" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uv_index.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="uv_index_clear_sky" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uv_index_clear_sky.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uv-index_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uv-index_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="noWifiIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\~ Assets (temporary) ~\noWifiIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -136,13 +139,49 @@
   <data name="snowflake_animated" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\~ Assets (temporary) ~\snowflake_animated.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="uv-index_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uv-index_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="uv_index_clear_sky" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uv_index_clear_sky.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="InputMessageBoxIcon1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="InputMessageBoxIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\~ Assets (temporary) ~\InputMessageBoxIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uv_index" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uv_index.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beaufort_0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\beaufort\beaufort_0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beaufort_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\beaufort\beaufort_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beaufort_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\beaufort\beaufort_2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beaufort_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\beaufort\beaufort_3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beaufort_4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\beaufort\beaufort_4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beaufort_5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\beaufort\beaufort_5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beaufort_6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\beaufort\beaufort_6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beaufort_7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\beaufort\beaufort_7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beaufort_8" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\beaufort\beaufort_8.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beaufort_9" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\beaufort\beaufort_9.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beaufort_10" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\beaufort\beaufort_10.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beaufort_11" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\beaufort\beaufort_11.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beaufort_12" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\beaufort\beaufort_12.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

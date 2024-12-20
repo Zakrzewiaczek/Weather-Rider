@@ -49,20 +49,20 @@ namespace Weather_Rider
         };
         private static readonly string[] timezones =
         [
-            "UTC-9", // America_Anchorage
-            "UTC-8", // America_Los_Angeles
-            "UTC-7", // America_Denver
-            "UTC-6", // America_Chicago
-            "UTC-5", // America_New_York
-            "UTC-3", // America_Sao_Paulo
-            "UTC+0", // GMT_0
-            "UTC+0", // Europe_London
-            "UTC+1", // Europe_Berlin
-            "UTC+3", // Europe_Moscow
-            "UTC+2", // Africa_Cairo
-            "UTC+7", // Asia_Bangkok
-            "UTC+8", // Asia_Singapore
-            "UTC+9", // Asia_Tokyo
+            "UTC-09", // America_Anchorage
+            "UTC-08", // America_Los_Angeles
+            "UTC-07", // America_Denver
+            "UTC-06", // America_Chicago
+            "UTC-05", // America_New_York
+            "UTC-03", // America_Sao_Paulo
+            "UTC+00", // GMT_0
+            "UTC+00", // Europe_London
+            "UTC+01", // Europe_Berlin
+            "UTC+03", // Europe_Moscow
+            "UTC+02", // Africa_Cairo
+            "UTC+07", // Asia_Bangkok
+            "UTC+08", // Asia_Singapore
+            "UTC+09", // Asia_Tokyo
             "UTC+10", // Australia_Sydney
             "UTC+12"  // Pacific_Auckland
         ];
@@ -152,6 +152,19 @@ namespace Weather_Rider
 
             (string? data, string? unit) = (value.data?.ToString(), value.unit?.ToString());
             (data, unit) = formatterFunction?.Invoke(key, data, unit) ?? (data ?? "N/A", unit ?? string.Empty);
+
+            output = (data ?? "N/A", unit ?? string.Empty);
+            return true;
+        }
+        public bool TryGetUnformattedData(string key, out (string data, string unit) output)
+        {
+            if (!allData.TryGetValue(key, out (object data, string unit) value))
+            {
+                output = ("N/A", string.Empty);
+                return false;
+            }
+
+            (string? data, string? unit) = (value.data?.ToString(), value.unit?.ToString());
 
             output = (data ?? "N/A", unit ?? string.Empty);
             return true;

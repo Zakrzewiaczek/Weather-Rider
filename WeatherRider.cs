@@ -66,8 +66,11 @@ namespace Weather_Rider
 
                 await SettingUpHeaderLabels();
                 SettingUpLabels(weatherAPI);
-                SettingUpaltitudesDataGridView(weatherAPI);
                 SettingUpUVGauges(weatherAPI);
+                var list = SettingUpaltitudesDataGridView(weatherAPI);
+                SettingUpAtlitudesWindDirection(weatherAPI, list);
+                SettingUpWindData(weatherAPI);
+
 
                 // Wait for the progress bar to finish
                 await Task.Delay(200);
@@ -278,8 +281,10 @@ namespace Weather_Rider
             #endregion
         }
 
-        private void SettingUpaltitudesDataGridView(WeatherAPI weatherAPI)
+        private List<(float, float)> SettingUpaltitudesDataGridView(WeatherAPI weatherAPI)
         {
+            List<(float, float)> values = new();
+
             string[] suffixes = ["1000hPa", "975hPa", "950hPa", "925hPa", "900hPa", "850hPa", "800hPa", "700hPa", "600hPa", "500hPa", "400hPa", "300hPa", "250hPa", "200hPa", "150hPa", "100hPa", "70hPa", "50hPa", "30hPa"];
             string[] altitudes = ["110 m", "320 m", "500 m", "800 m", "1000 m", "1500 m", "1900 m", "3 km", "4.2 km", "5.6 km", "7.2 km", "9.2 km", "10.4 km", "11.8 km", "13.5 km", "15.8 km", "17.7 km", "19.3 km", "22 km"];
 
@@ -299,6 +304,11 @@ namespace Weather_Rider
                 string windSpeed = weatherAPI.TryGetData($"wind_speed_{suffixes[index]}", out var windSpeedData) ? $"{windSpeedData.data} {windSpeedData.unit}" : string.Empty;
                 string windDirection = weatherAPI.TryGetData($"wind_direction_{suffixes[index]}", out var windDirectionData) ? windDirectionData.data : string.Empty;
 
+                float s1 = float.Parse(weatherAPI.TryGetData($"wind_speed_{suffixes[index]}", out var output1) ? output1.data.Replace(",", ".") : "0", CultureInfo.InvariantCulture);
+                float s2 = float.Parse(weatherAPI.TryGetUnformattedData($"wind_direction_{suffixes[index]}", out var output2) ? output2.data : "0", CultureInfo.InvariantCulture);
+                
+                values.Add((s1, s2));
+
                 Invoke(() => altitudesDataGridView.Rows.Add(altitude, temperature, humidity, windSpeed, windDirection));
                 Debug.WriteLine(altitude);
             }
@@ -308,6 +318,8 @@ namespace Weather_Rider
                 await Task.Delay(10);
                 loadingForm.Progress += 2;
             }).Start();
+
+            return values;
         }
         private async Task SettingUpHeaderLabels()
         {
@@ -333,6 +345,71 @@ namespace Weather_Rider
                 string lon = station.Value.Lon.ToString(CultureInfo.InvariantCulture);
                 station_position_label.Text = $"Latitude: {lat}°          Longitude: {lon}°";
             });
+        }
+
+        private void SettingUpAtlitudesWindDirection(WeatherAPI weatherAPI, List<(float, float)> values)
+        {
+            List<Image> beaufort_scale_images =
+            [
+                Properties.Resources.beaufort_0.Resize(100, 100),
+                Properties.Resources.beaufort_1.Resize(100, 100),
+                Properties.Resources.beaufort_2.Resize(100, 100),
+                Properties.Resources.beaufort_3.Resize(100, 100),
+                Properties.Resources.beaufort_4.Resize(100, 100),
+                Properties.Resources.beaufort_5.Resize(100, 100),
+                Properties.Resources.beaufort_6.Resize(100, 100),
+                Properties.Resources.beaufort_7.Resize(100, 100),
+                Properties.Resources.beaufort_8.Resize(100, 100),
+                Properties.Resources.beaufort_9.Resize(100, 100),
+                Properties.Resources.beaufort_10.Resize(100, 100),
+                Properties.Resources.beaufort_11.Resize(100, 100),
+                Properties.Resources.beaufort_12.Resize(100, 100)
+            ];
+
+            List<Image> windImages = [];
+
+            for(int index = 0; index < altitudesDataGridView.Rows.Count; index++)
+            {
+                var row = altitudesDataGridView.Rows[index];
+
+                float windSpeed = values[index].Item1;
+                float windDirection = values[index].Item2;
+
+                Image image = beaufort_scale_images[Conversion.KphToBeaufort(windSpeed)]
+                    .Rotate(windDirection + 90)!;
+
+                windImages.Add(image);
+            }
+
+            Image mergedImages = ImageEditor.Merge(windImages, 5);
+            beaufort_wind_data_pictures.BackgroundImage = mergedImages;
+        }
+
+        private void SettingUpWindData(WeatherAPI weatherAPI)
+        {
+            //windDataPictureBox
+            List<Image> beaufort_scale_images =
+            [
+                Properties.Resources.beaufort_0,
+                Properties.Resources.beaufort_1,
+                Properties.Resources.beaufort_2,
+                Properties.Resources.beaufort_3,
+                Properties.Resources.beaufort_4,
+                Properties.Resources.beaufort_5,
+                Properties.Resources.beaufort_6,
+                Properties.Resources.beaufort_7,
+                Properties.Resources.beaufort_8,
+                Properties.Resources.beaufort_9,
+                Properties.Resources.beaufort_10,
+                Properties.Resources.beaufort_11,
+                Properties.Resources.beaufort_12
+            ];
+
+            float speed = float.Parse(weatherAPI.TryGetUnformattedData("wind_speed_10m", out var output1) ? output1.data.Replace(",", ".") : "0", CultureInfo.InvariantCulture);
+            float direction = int.Parse(weatherAPI.TryGetUnformattedData("wind_direction_10m", out var output2) ? output2.data.Replace(",", ".") : "0", CultureInfo.InvariantCulture);
+
+            Image image = beaufort_scale_images[Conversion.KphToBeaufort(speed)].Rotate(direction + 90)!;
+            windDataPictureBox.BackgroundImage = image;
         }
 
 
